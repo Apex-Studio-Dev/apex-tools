@@ -51,6 +51,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker data-root into build space
+        run: |
+          sudo systemctl stop docker.socket docker.service
+          sudo mv /var/lib/docker "$GITHUB_WORKSPACE/.docker-lib"
+          sudo mkdir -p /etc/docker
+          echo '{"data-root":"'"$GITHUB_WORKSPACE"'/.docker-lib"}' | sudo tee /etc/docker/daemon.json
+          sudo systemctl start docker
       - name: Build CMake
         working-directory: builder/cmake-custom
         run: |
