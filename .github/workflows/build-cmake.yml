@@ -68,7 +68,7 @@ jobs:
       - name: Build CMake
         working-directory: builder/cmake-custom
         run: |
-          IMAGE="ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/cmake-builder:latest"
+          IMAGE="ghcr.io/apex-studio-dev/cmake-builder:latest"
           docker run --rm \
             -v "/mnt/build:/work" -w /work --user "$(id -u):$(id -g)" \
             -e HOME=/work \
