@@ -100,7 +100,6 @@ jobs:
             rm -f "split/${{ inputs.kind }}-$ver.tar.xz"
             rm -rf "$TMPDIR"/*
           done
-          done
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.kind }}-${{ matrix.host }}
