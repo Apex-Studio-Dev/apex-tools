@@ -1,0 +1,114 @@
+name: Build CMake package
+
+on:
+  workflow_dispatch:
+    inputs:
+      versions:
+        description: "JSON array of CMake versions (Kitware tags, no leading v)"
+        required: true
+        default: '["4.1.2"]'
+      ninja_version:
+        required: false
+        default: "1.12.1"
+      platform:
+        required: false
+        default: android
+      ndk_version:
+        required: false
+        default: "27"
+      ndk_revision:
+        required: false
+        default: d
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: aarch64-linux-android
+            host: linux-arm64
+          - target: armv7a-linux-android
+            host: linux-arm
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: easimon/maximize-build-space@v10
+        with:
+          root-reserve-mb: 5120
+          swap-size-mb: 5120
+          remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+          remove-docker-images: "true"
+      - name: Move Docker to /mnt
+        run: |
+          sudo systemctl stop docker.socket docker.service
+          sudo mkdir -p /mnt/docker
+          sudo rsync -aqP /var/lib/docker/ /mnt/docker/
+          sudo rm -rf /var/lib/docker
+          sudo ln -s /mnt/docker /var/lib/docker
+          sudo systemctl start docker
+      - name: Prepare /mnt/build
+        run: |
+          sudo mkdir -p /mnt/build
+          sudo chown $(id -u):$(id -g) /mnt/build
+          rmdir "$GITHUB_WORKSPACE"
+          ln -s /mnt/build "$GITHUB_WORKSPACE"
+      - uses: actions/checkout@v5
+      - uses: docker/login-action@v4.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build CMake
+        working-directory: builder/cmake-custom
+        run: |
+          IMAGE="ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/cmake-builder:latest"
+          docker run --rm \
+            -v "/mnt/build:/work" -w /work --user "$(id -u):$(id -g)" \
+            -e HOME=/work \
+            -e PLATFORM='${{ inputs.platform }}' \
+            -e TARGET=${{ matrix.target }} \
+            -e CMAKE_VERSION='${{ inputs.versions && fromJSON(inputs.versions)[0] }}' \
+            -e NINJA_VERSION='${{ inputs.ninja_version }}' \
+            -e NDK_VERSION='${{ inputs.ndk_version }}' \
+            -e NDK_REVISION='${{ inputs.ndk_revision }}' \
+            -e ROOTDIR=/work \
+            "$IMAGE" \
+            bash -c 'scripts/build-openssl.sh && scripts/build.sh && scripts/make-cmake.sh'
+      - name: Package
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          ver=$(echo '${{ inputs.versions }}' | jq -r '.[0]')
+          scripts/make-package.sh cmake "$ver" '${{ matrix.host }}' "builder/cmake-custom/cmake-${{ matrix.target }}.tar.xz"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmake-${{ matrix.host }}
+          path: dist/*
+          retention-days: 1
+
+  release:
+    needs: build
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        ver: ${{ fromJSON(inputs.versions) }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: ncipollo/release-action@v1.21.0
+        with:
+          tag: apex-cmake-${{ matrix.ver }}
+          name: apex-cmake-${{ matrix.ver }}
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: "dist/cmake-${{ matrix.ver }}-*"
