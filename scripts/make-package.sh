@@ -77,7 +77,14 @@ Pkg.Revision=${version}
 EOF
       fi
     elif [ "$kind" = platforms ]; then
-      sed -i "s|\${PLATFORM_VERSION}|${version#android-}|g" "$sp"
+      major=${version#android-}; major=${major%%.*}
+      case "$major" in
+        30) androidver=11 ;; 31) androidver=12 ;; 32) androidver=12 ;;
+        33) androidver=13 ;; 34) androidver=14 ;; 35) androidver=15 ;;
+        36) androidver=16 ;; 37) androidver=17 ;;
+        *) androidver=$(printf '%d' "$major" 2>/dev/null || echo "$major") ;;
+      esac
+      sed -i "s|\${PLATFORM_VERSION}|$androidver|g" "$sp"
     fi
     ;;
 esac
