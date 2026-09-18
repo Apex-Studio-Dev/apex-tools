@@ -36,5 +36,5 @@ jobs:
         with:
           context: builder/${{ matrix.name }}/docker
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}:latest
+          tags: ghcr.io/apex-studio-dev/${{ matrix.image }}:latest
           build-args: REPO_OWNER=${{ github.repository_owner }}
