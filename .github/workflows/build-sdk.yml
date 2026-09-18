@@ -106,7 +106,6 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-24.04
-    if: ${{ inputs.kind != 'build-tools' || matrix.ver == fromJSON(inputs.versions)[0] }}
     strategy:
       fail-fast: false
       matrix:
@@ -116,7 +115,9 @@ jobs:
         with:
           path: dist
           merge-multiple: true
-      - uses: ncipollo/release-action@v1.21.0
+      - name: Release ${{ matrix.ver }}
+        if: ${{ inputs.kind != 'build-tools' || matrix.ver == fromJSON(inputs.versions)[0] }}
+        uses: ncipollo/release-action@v1.21.0
         with:
           tag: apex-${{ inputs.kind }}-${{ matrix.ver }}
           name: apex-${{ inputs.kind }}-${{ matrix.ver }}
