@@ -62,19 +62,22 @@ EOF
 
 case "$kind" in
   platforms|build-tools)
-    if [ ! -f "$work/pkg/$name/source.properties" ]; then
+    sp="$work/pkg/$name/source.properties"
+    if [ ! -f "$sp" ]; then
       if [ "$kind" = platforms ]; then
-        cat > "$work/pkg/$name/source.properties" <<EOF
+        cat > "$sp" <<EOF
 Pkg.Desc=Android SDK Platform ${version#android-}
 Pkg.Revision=${version#android-}
 AndroidVersion.ApiLevel=${version#android-}
 EOF
       else
-        cat > "$work/pkg/$name/source.properties" <<EOF
+        cat > "$sp" <<EOF
 Pkg.Desc=Android SDK Build-Tools
 Pkg.Revision=${version}
 EOF
       fi
+    elif [ "$kind" = platforms ]; then
+      sed -i "s|\${PLATFORM_VERSION}|${version#android-}|g" "$sp"
     fi
     ;;
 esac
