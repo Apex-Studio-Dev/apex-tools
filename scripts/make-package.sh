@@ -61,20 +61,21 @@ cat > "$work/pkg/$name/package.xml" <<EOF
 EOF
 
 case "$kind" in
-  platforms)
-    cat > "$work/pkg/$name/source.properties" <<EOF
+  platforms|build-tools)
+    if [ ! -f "$work/pkg/$name/source.properties" ]; then
+      if [ "$kind" = platforms ]; then
+        cat > "$work/pkg/$name/source.properties" <<EOF
 Pkg.Desc=Android SDK Platform ${version#android-}
 Pkg.Revision=${version#android-}
 AndroidVersion.ApiLevel=${version#android-}
-Pkg.License=apex-sdk-license
 EOF
-    ;;
-  build-tools)
-    cat > "$work/pkg/$name/source.properties" <<EOF
+      else
+        cat > "$work/pkg/$name/source.properties" <<EOF
 Pkg.Desc=Android SDK Build-Tools
 Pkg.Revision=${version}
-Pkg.License=apex-sdk-license
 EOF
+      fi
+    fi
     ;;
 esac
 
