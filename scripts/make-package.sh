@@ -62,11 +62,10 @@ EOF
 
 case "$kind" in
   platforms)
-    api=$(printf '%d' "${version#android-}" 2>/dev/null || echo 0)
     cat > "$work/pkg/$name/source.properties" <<EOF
 Pkg.Desc=Android SDK Platform ${version#android-}
 Pkg.Revision=${version#android-}
-AndroidVersion.ApiLevel=${api}
+AndroidVersion.ApiLevel=${version#android-}
 Pkg.License=apex-sdk-license
 EOF
     ;;
