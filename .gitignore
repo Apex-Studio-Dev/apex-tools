@@ -1,4 +1,4 @@
-apex
+/apex
 *.test
 build/
 out/
