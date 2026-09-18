@@ -1,0 +1,91 @@
+name: Make Components (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      component:
+        required: true
+        type: string # platforms|build-tools|platform-tools|cmake|ndk
+      versions:
+        required: true
+        type: string # JSON array, e.g. ["34","35"]
+      hosts:
+        required: true
+        type: string # JSON array of hosttags, e.g. ["linux-arm64","linux-arm"]
+      assets:
+        required: true
+        type: string # JSON object hosttag -> array of upstream archive URLs (per version)
+    secrets:
+      GH_TOKEN:
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        host: ${{ fromJSON(inputs.hosts) }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Package ${{ inputs.component }} for ${{ matrix.host }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p dist split
+          urls=$(echo '${{ inputs.assets }}' | jq -r --arg h '${{ matrix.host }}' '.[$h] // [] | length')
+          case '${{ inputs.component }}' in
+            platforms|build-tools|platform-tools)
+              # split flow: assets[host] = single full-SDK splice archive
+              [ "$urls" -eq 1 ] || { echo "expect 1 SDK archive URL" >&2; exit 5; }
+              url=$(echo '${{ inputs.assets }}' | jq -r --arg h '${{ matrix.host }}' '.[$h][0]')
+              curl -fL --retry 3 -o sdk.archive "$url"
+              for ver in $(echo '${{ inputs.versions }}' | jq -r '.[]'); do
+                echo "=== ${{ inputs.component }} $ver (${{ matrix.host }})"
+                scripts/split-sdk.sh sdk.archive '${{ inputs.component }}' "$ver"
+                scripts/make-package.sh '${{ inputs.component }}' "$ver" '${{ matrix.host }}' "split/${{ inputs.component }}-$ver.tar.xz"
+              done
+              rm -f sdk.archive
+              ;;
+            *)
+              # direct flow: assets[host] = URLs aligned with versions
+              verlen=$(echo '${{ inputs.versions }}' | jq length)
+              [ "$verlen" -eq "$urls" ] || { echo "versions/urls length mismatch for host ${{ matrix.host }}" >&2; exit 5; }
+              for i in $(seq 0 $((verlen-1))); do
+                ver=$(echo '${{ inputs.versions }}' | jq -r ".[$i]")
+                url=$(echo '${{ inputs.assets }}' | jq -r --arg h '${{ matrix.host }}' ".[$h][$i]")
+                echo "=== ${{ inputs.component }} $ver (${{ matrix.host }}) <- $url"
+                curl -fL --retry 3 -o in.archive "$url"
+                scripts/make-package.sh '${{ inputs.component }}' "$ver" '${{ matrix.host }}' in.archive
+              done
+              ;;
+          esac
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.component }}-${{ matrix.host }}
+          path: dist/*
+
+  release:
+    needs: package
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        ver: ${{ fromJSON(inputs.versions) }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Release ${{ inputs.component }} ${{ matrix.ver }}
+        uses: ncipollo/release-action@v1.21.0
+        with:
+          tag: apex-${{ inputs.component }}-${{ matrix.ver }}
+          name: apex-${{ inputs.component }}-${{ matrix.ver }}
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: "dist/${{ inputs.component }}-${{ matrix.ver }}-*"

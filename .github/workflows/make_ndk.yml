@@ -1,0 +1,67 @@
+name: Make NDK
+
+on:
+  workflow_dispatch:
+    inputs:
+      ndk_version:
+        description: "NDK version, e.g. 30 (release tag of upstream)"
+        required: true
+        default: "30"
+      revision:
+        description: "Optional revision letter, e.g. b (empty = none)"
+        required: false
+        default: ""
+      pkg_version:
+        description: "SDK package version for catalog (major.minor.micro)"
+        required: true
+        default: "30.0.0"
+      source_repo:
+        description: "Upstream repo providing android-ndk-rXX-<target>.tar.xz"
+        required: true
+        default: "Apex-Studio-Dev/android-ndk-custom"
+      hosts:
+        description: "JSON array of hosttags"
+        required: true
+        default: '["linux-arm64","linux-arm"]'
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        host: ${{ fromJSON(inputs.hosts) }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Download upstream NDK
+        run: |
+          set -euo pipefail
+          rev='${{ inputs.revision }}'
+          case '${{ matrix.host }}' in
+            linux-arm64) target=aarch64-linux-android ;;
+            linux-arm)   target=armv7a-linux-androideabi ;;
+            linux-x64)   target=x86_64-linux-android ;;
+          esac
+          asset="android-ndk-r${{ inputs.ndk_version }}${rev}-${target}.tar.xz"
+          curl -fL --retry 3 -o ndk.archive \
+            "https://github.com/${{ inputs.source_repo }}/releases/download/r${{ inputs.ndk_version }}/$asset"
+          mkdir -p dist split
+          scripts/make-package.sh ndk '${{ inputs.pkg_version }}' '${{ matrix.host }}' ndk.archive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ndk-${{ matrix.host }}
+          path: dist/*
+      - uses: ncipollo/release-action@v1.21.0
+        with:
+          tag: apex-ndk-${{ inputs.pkg_version }}
+          name: apex-ndk-${{ inputs.pkg_version }}
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: "dist/ndk-${{ inputs.pkg_version }}-*"

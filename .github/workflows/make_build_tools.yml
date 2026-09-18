@@ -1,0 +1,63 @@
+name: Make Build-Tools
+
+on:
+  workflow_dispatch:
+    inputs:
+      versions:
+        description: "JSON array of build-tools versions"
+        required: true
+        default: '["37.0.0"]'
+      sdk_repo:
+        description: "Upstream repo providing android-sdk-<target>.tar.xz"
+        required: true
+        default: "Apex-Studio-Dev/android-sdk-custom"
+      sdk_tag:
+        description: "Upstream release tag (empty = latest)"
+        required: false
+        default: ""
+      hosts:
+        description: "JSON array of hosttags"
+        required: true
+        default: '["linux-arm64","linux-arm"]'
+
+permissions:
+  contents: write
+
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    outputs:
+      tag: ${{ steps.r.outputs.tag }}
+      urls: ${{ steps.r.outputs.urls }}
+    steps:
+      - id: r
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          repo='${{ inputs.sdk_repo }}'
+          if [ -z '${{ inputs.sdk_tag }}' ]; then
+            tag=$(gh api "repos/$repo/releases/latest" -q .tag_name)
+          else
+            tag='${{ inputs.sdk_tag }}'
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          # hosttag -> upstream TARGET triple (android-sdk-custom naming)
+          arm64=aarch64-linux-musl
+          arm=armv7a-linux-musleabihf
+          x64=x86_64-linux-musl
+          urls=$(echo '${{ inputs.hosts }}' | jq -r --arg repo "$repo" --arg tag "$tag" --arg a64 "$arm64" --arg arm "$arm" --arg x64 "$x64" '
+            [ .[] | ({"linux-arm64":"android-sdk-\($a64).tar.xz",
+                     "linux-arm":"android-sdk-\($arm).tar.xz",
+                     "linux-x64":"android-sdk-\($x64).tar.xz"}[.])
+                  | "https://github.com/\($repo)/releases/download/\($tag)/\(.)" ] | tojson')
+          echo "urls=$urls" >> "$GITHUB_OUTPUT"
+
+  package:
+    needs: resolve
+    uses: ./.github/workflows/make-components.yml
+    with:
+      component: build-tools
+      versions: ${{ inputs.versions }}
+      hosts: ${{ inputs.hosts }}
+      assets: ${{ needs.resolve.outputs.urls }}
