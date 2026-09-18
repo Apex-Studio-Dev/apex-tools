@@ -8,11 +8,11 @@ on arm64/arm and installs SDK components built by this repo.
 
 | Package    | Versions                                   | Sources      |
 |------------|--------------------------------------------|--------------|
-| platforms  | android-30 .. android-37.2                 | AOSP         |
-| build-tools| 33.0.0 .. 37.0.0                           | AOSP (android-sdk-custom method) |
-| platform-tools | latest                                 | AOSP (android-sdk-custom method) |
-| cmake      | 3.18.1 .. 4.1.2                            | cmake-custom method |
-| ndk        | r26 .. r30                                 | android-ndk-custom method |
+| platforms  | android-30 31 32 33 34 35 36 36.1 37.0 37.1 37.2 | AOSP         |
+| build-tools| 33.0.0 33.0.1 33.0.2 33.0.3 34.0.0 35.0.0 35.0.1 36.0.0 36.1.0 37.0.0 | AOSP (android-sdk-custom method) |
+| platform-tools | 37.0.1                                   | AOSP (android-sdk-custom method) |
+| cmake      | 3.18.1 3.22.1 3.30.3 3.30.4 3.30.5 3.31.0 3.31.1 3.31.4 3.31.5 3.31.6 4.0.2 4.0.3 4.1.0 4.1.1 4.1.2 | cmake-custom method |
+| ndk        | 26.0.10792818 26.1.10909125 26.2.11394342 26.3.11579264 27.0.12077973 27.1.12297006 27.2.12479018 27.3.13750724 28.0.13004108 28.1.13356709 28.2.13676358 29.0.14206865 30.0.16248370 | android-ndk-custom method |
 
 Host tags: `linux-arm64`, `linux-arm` (+ `linux-x64` convenience).
 

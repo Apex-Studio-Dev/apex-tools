@@ -110,7 +110,7 @@ rm -rf "$HOST_SDK"; mkdir -p "$HOST_SDK"
   # installs each so split-sdk.sh can carve per-version packages. Upgrade path:
   # per-version platform zips from dl.google.com if sdkmanager churn hurts.
   for p in ${PLATFORMS:-}; do
-    case $p in ''|*[!0-9]*) continue ;; esac
+    case $p in ''|*[!0-9.]*) continue ;; esac
     log "Fetching platforms;android-$p"
     cmdline-tools/bin/sdkmanager --sdk_root=. "platforms;android-$p"
   done )
