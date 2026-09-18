@@ -76,6 +76,7 @@ jobs:
             -e NDK_VERSION='${{ inputs.ndk_version }}' \
             -e NDK_REVISION='${{ inputs.ndk_revision }}' \
             -e ROOTDIR=/work/builder/android-sdk-custom \
+            -e PLATFORMS="$(echo '${{ inputs.versions }}' | jq -r 'join(" ")')" \
             "$IMAGE" \
             bash -c 'scripts/fetch-source.sh && scripts/build.sh && scripts/make-sdk.sh'
       - name: Split + package all versions

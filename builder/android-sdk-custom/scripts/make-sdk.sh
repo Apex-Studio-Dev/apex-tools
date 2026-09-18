@@ -105,7 +105,15 @@ rm -rf "$HOST_SDK"; mkdir -p "$HOST_SDK"
   # Bounded "y" stream, not `yes`: under pipefail `yes` takes SIGPIPE (141) when
   # sdkmanager closes stdin, aborting the script.
   printf 'y\n%.0s' {1..100} | cmdline-tools/bin/sdkmanager --sdk_root=. --licenses
-  cmdline-tools/bin/sdkmanager --sdk_root=. "build-tools;$BUILD_TOOLS_VERSION" "platform-tools" )
+  cmdline-tools/bin/sdkmanager --sdk_root=. "build-tools;$BUILD_TOOLS_VERSION" "platform-tools"
+  # ponytail: splice used to carry no platforms/ at all; PLATFORMS="30 31 ..."
+  # installs each so split-sdk.sh can carve per-version packages. Upgrade path:
+  # per-version platform zips from dl.google.com if sdkmanager churn hurts.
+  for p in ${PLATFORMS:-}; do
+    case $p in ''|*[!0-9]*) continue ;; esac
+    log "Fetching platforms;android-$p"
+    cmdline-tools/bin/sdkmanager --sdk_root=. "platforms;android-$p"
+  done )
 
 # --- splice our ELF host tools over the official ones -----------------------
 log "Splicing custom host tools into the SDK"
