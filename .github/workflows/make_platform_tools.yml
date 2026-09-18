@@ -10,7 +10,7 @@ on:
       sdk_repo:
         description: "Upstream repo providing android-sdk-<target>.tar.xz"
         required: true
-        default: "Apex-Studio-Dev/android-sdk-custom"
+        default: "HomuHomu833/android-sdk-custom"
       sdk_tag:
         description: "Upstream release tag (empty = latest)"
         required: false

@@ -18,7 +18,7 @@ on:
       source_repo:
         description: "Upstream repo providing android-ndk-rXX-<target>.tar.xz"
         required: true
-        default: "Apex-Studio-Dev/android-ndk-custom"
+        default: "HomuHomu833/android-ndk-custom"
       hosts:
         description: "JSON array of hosttags"
         required: true
