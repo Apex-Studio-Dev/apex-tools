@@ -67,7 +67,10 @@ jobs:
         run: |
           IMAGE="ghcr.io/apex-studio-dev/sdk-builder:latest"
           BT='${{ inputs.build_tools_version }}'
-          if [ '${{ inputs.kind }}' = build-tools ]; then
+          PLATS=''
+          if [ '${{ inputs.kind }}' = platforms ]; then
+            PLATS=$(echo '${{ inputs.versions }}' | jq -r 'join(" ")')
+          elif [ '${{ inputs.kind }}' = build-tools ]; then
             BT=$(echo '${{ inputs.versions }}' | jq -r '.[0]')
           fi
           docker run --rm \
@@ -80,7 +83,7 @@ jobs:
             -e NDK_VERSION='${{ inputs.ndk_version }}' \
             -e NDK_REVISION='${{ inputs.ndk_revision }}' \
             -e ROOTDIR=/work/builder/android-sdk-custom \
-            -e PLATFORMS="$(echo '${{ inputs.versions }}' | jq -r 'join(" ")')" \
+            -e PLATFORMS="$PLATS" \
             "$IMAGE" \
             bash -c 'scripts/fetch-source.sh && scripts/build.sh && scripts/make-sdk.sh'
       - name: Split + package all versions
