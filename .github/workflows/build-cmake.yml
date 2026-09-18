@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       versions:
-        description: "JSON array of CMake versions (Kitware tags, no leading v)"
+        description: "JSON array of CMake versions (Kitware tags, no leading v); ONE version per dispatch"
         required: true
         default: '["4.1.2"]'
       ninja_version:
@@ -32,7 +32,7 @@ jobs:
         include:
           - target: aarch64-linux-android
             host: linux-arm64
-          - target: armv7a-linux-android
+          - target: armv7a-linux-androideabi
             host: linux-arm
     runs-on: ubuntu-24.04
     steps:
@@ -89,10 +89,6 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        ver: ${{ fromJSON(inputs.versions) }}
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -100,8 +96,8 @@ jobs:
           merge-multiple: true
       - uses: ncipollo/release-action@v1.21.0
         with:
-          tag: apex-cmake-${{ matrix.ver }}
-          name: apex-cmake-${{ matrix.ver }}
+          tag: apex-cmake-${{ fromJSON(inputs.versions)[0] }}
+          name: apex-cmake-${{ fromJSON(inputs.versions)[0] }}
           allowUpdates: true
           replacesArtifacts: true
-          artifacts: "dist/cmake-${{ matrix.ver }}-*"
+          artifacts: "dist/cmake-${{ fromJSON(inputs.versions)[0] }}-*"
