@@ -1,7 +1,7 @@
 /extras
 /build
 /install
-/cmake-[0-9]*
+/cmake-*
 /ninja-*
 /openssl
 /zig-as-llvm
