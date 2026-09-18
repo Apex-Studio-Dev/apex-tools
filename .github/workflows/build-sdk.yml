@@ -86,7 +86,8 @@ jobs:
       - name: Split + package all versions
         run: |
           set -euo pipefail
-          mkdir -p split dist
+          export TMPDIR="$GITHUB_WORKSPACE/tmp"
+          mkdir -p split dist "$TMPDIR"
           BT=$(echo '${{ inputs.versions }}' | jq -r '.[0]')
           for ver in $(echo '${{ inputs.versions }}' | jq -r '.[]'); do
             if [ '${{ inputs.kind }}' = build-tools ] && [ "$ver" != "$BT" ]; then
@@ -96,6 +97,9 @@ jobs:
             echo "=== ${{ inputs.kind }} $ver (${{ matrix.host }})"
             scripts/split-sdk.sh "builder/android-sdk-custom/android-sdk-${{ matrix.target }}.tar.xz" '${{ inputs.kind }}' "$ver"
             scripts/make-package.sh '${{ inputs.kind }}' "$ver" '${{ matrix.host }}' "split/${{ inputs.kind }}-$ver.tar.xz"
+            rm -f "split/${{ inputs.kind }}-$ver.tar.xz"
+            rm -rf "$TMPDIR"/*
+          done
           done
       - uses: actions/upload-artifact@v4
         with:
