@@ -320,6 +320,10 @@ case "$PLATFORM" in
         "$ROOTDIR/cmake-$CMAKE_VERSION/Utilities/cmlibuv/CMakeLists.txt" || true
     sed -i 's#src/unix/epoll.c#src/unix/pthread-fixes.c\n    src/unix/epoll.c#' \
         "$ROOTDIR/cmake-$CMAKE_VERSION/Utilities/cmlibuv/CMakeLists.txt" || true
+    # bionic has no pthread_getaffinity_np (glibc-only); sched_getaffinity(0,
+    # ...) is the equivalent and is in <sched.h> already included here.
+    sed -i 's/pthread_getaffinity_np(pthread_self(), sizeof(cpuset), \&cpuset)/sched_getaffinity(0, sizeof(cpuset), \&cpuset)/' \
+        "$ROOTDIR/cmake-$CMAKE_VERSION/Source/cmAffinity.cxx" || true
     # Android host: CMakeDetermineSystem.cmake reads $PREFIX/include/android/
     # api-level.h for CMAKE_SYSTEM_VERSION. PREFIX is a Termux convention, so
     # elsewhere it is unset and the unguarded file(READ) errors out. Fall back to
