@@ -2,6 +2,7 @@
    file LICENSE.rst or https://cmake.org/licensing for details.  */
 #include "cmCurl.h"
 
+#include <cm/optional>
 #include <cm/string_view>
 #include <cmext/string_view>
 
