@@ -51,14 +51,43 @@ case "$kind" in
   cmake)          pkgpath="cmake;$version" ;;
   ndk)            pkgpath="ndk;${major}.${minor}.${micro}" ;;
 esac
-cat > "$work/pkg/$name/package.xml" <<EOF
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<localPackage path="${pkgpath}" obsolete="false" schema-version="3" xmlns="http://schemas.android.com/repository/android/common/02">
-    <revision><major>${major}</major><minor>${minor}</minor><micro>${micro}</micro></revision>
-    <display-name>${kind} ${version}</display-name>
-    <uses-license ref="apex-sdk-license" />
-</localPackage>
-EOF
+
+# Google-style display-name; platforms use the Android OS version (37.x -> 17).
+case "$kind" in
+  platforms)
+    pv=${version#android-}; dver=${pv%%.*}
+    case "$dver" in
+      30) androidver=11 ;; 31) androidver=12 ;; 32) androidver=12 ;;
+      33) androidver=13 ;; 34) androidver=14 ;; 35) androidver=15 ;;
+      36) androidver=16 ;; 37) androidver=17 ;;
+      *) androidver=$(printf '%d' "$dver" 2>/dev/null || echo "$dver") ;;
+    esac
+    dn="Android SDK Platform $androidver"
+    ;;
+  build-tools)    dn="Android SDK Build-Tools ${version%%.*}" ;;
+  platform-tools) dn="Android SDK Platform-Tools" ;;
+  cmake)          dn="CMake $version" ;;
+  ndk)            dn="NDK (Side by side) $version" ;;
+esac
+
+# package.xml mirrors Google's repository.xml: namespaced root, embedded
+# license text, genericDetailsType and a uses-license reference.
+license_file=licenses/apex-sdk-license
+[ -f "$license_file" ] || { echo "missing $license_file" >&2; exit 5; }
+{
+  printf '%s\n' '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+  printf '<ns2:repository xmlns:ns2="http://schemas.android.com/repository/android/common/02" xmlns:ns3="http://schemas.android.com/repository/android/common/01" xmlns:ns4="http://schemas.android.com/repository/android/generic/01" xmlns:ns5="http://schemas.android.com/repository/android/generic/02" xmlns:ns6="http://schemas.android.com/sdk/android/repo/addon2/01" xmlns:ns7="http://schemas.android.com/sdk/android/repo/addon2/02" xmlns:ns8="http://schemas.android.com/sdk/android/repo/addon2/03" xmlns:ns9="http://schemas.android.com/sdk/android/repo/repository2/01" xmlns:ns10="http://schemas.android.com/sdk/android/repo/repository2/02" xmlns:ns11="http://schemas.android.com/sdk/android/repo/repository2/03" xmlns:ns12="http://schemas.android.com/sdk/android/repo/sys-img2/04" xmlns:ns13="http://schemas.android.com/sdk/android/repo/sys-img2/03" xmlns:ns14="http://schemas.android.com/sdk/android/repo/sys-img2/02" xmlns:ns15="http://schemas.android.com/sdk/android/repo/sys-img2/01">'
+  printf '<license id="apex-sdk-license" type="text">'
+  sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' "$license_file"
+  printf '%s\n' '</license>'
+  printf '<localPackage path="%s" obsolete="false">\n' "$pkgpath"
+  printf '    <type-details xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns5:genericDetailsType"/>\n'
+  printf '    <revision><major>%s</major><minor>%s</minor><micro>%s</micro></revision>\n' "$major" "$minor" "$micro"
+  printf '    <display-name>%s</display-name>\n' "$dn"
+  printf '    <uses-license ref="apex-sdk-license"/>\n'
+  printf '%s\n' '</localPackage>'
+  printf '%s\n' '</ns2:repository>'
+} > "$work/pkg/$name/package.xml"
 
 case "$kind" in
   platforms|build-tools)
@@ -77,13 +106,6 @@ Pkg.Revision=${version}
 EOF
       fi
     elif [ "$kind" = platforms ]; then
-      major=${version#android-}; major=${major%%.*}
-      case "$major" in
-        30) androidver=11 ;; 31) androidver=12 ;; 32) androidver=12 ;;
-        33) androidver=13 ;; 34) androidver=14 ;; 35) androidver=15 ;;
-        36) androidver=16 ;; 37) androidver=17 ;;
-        *) androidver=$(printf '%d' "$major" 2>/dev/null || echo "$major") ;;
-      esac
       sed -i "s|\${PLATFORM_VERSION}|$androidver|g" "$sp"
     fi
     ;;

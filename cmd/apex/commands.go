@@ -149,18 +149,46 @@ func cmdInstall(args []string) error {
 }
 
 func displayNameFor(kind, version string) string {
+	v := strings.TrimPrefix(version, "android-")
 	switch kind {
 	case "platforms":
-		return "Android SDK Platform " + strings.TrimPrefix(version, "android-")
+		return "Android SDK Platform " + androidVersion(v)
 	case "build-tools":
-		return "Android SDK Build-Tools " + version
+		return "Android SDK Build-Tools " + strings.SplitN(v, ".", 2)[0]
+	case "platform-tools":
+		return "Android SDK Platform-Tools"
 	case "cmake":
-		return "CMake " + version
+		return "CMake " + v
 	case "ndk":
-		return "NDK (Side by side) " + version
+		return "NDK (Side by side) " + v
 	default:
-		return kind + " " + version
+		return kind + " " + v
 	}
+}
+
+// androidVersion maps an API-level string (e.g. "37.2", "34") to the Android
+// OS version used by Google in Pkg.Desc / Platform.Version / display-name.
+func androidVersion(api string) string {
+	major := strings.SplitN(api, ".", 2)[0]
+	switch major {
+	case "30":
+		return "11"
+	case "31":
+		return "12"
+	case "32":
+		return "12"
+	case "33":
+		return "13"
+	case "34":
+		return "14"
+	case "35":
+		return "15"
+	case "36":
+		return "16"
+	case "37":
+		return "17"
+	}
+	return major
 }
 
 func cmdUninstall(args []string) error {
