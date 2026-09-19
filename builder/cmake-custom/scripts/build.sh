@@ -295,7 +295,9 @@ sed -i '/auto separator = cm::string_view{/,/}/c\
 if [ "$(echo "$CMAKE_VERSION" | cut -d. -f1)" -ge 4 ]; then
   cp "$ROOTDIR/patches/cmake/cmCurl.cxx" "$ROOTDIR/cmake-$CMAKE_VERSION/Source/cmCurl.cxx"
 else
-  perl -0pi -e 's{std::string cmCurlSetCAInfo\(::CURL\* curl, const char\* cafile\)\n\{\n  std::string e;}{std::string cmCurlSetCAInfo(::CURL* curl, const char* cafile)\n\{\n  std::string e;\n  std::string hack_home;\n  cmSystemTools::GetEnv("HOME", hack_home);\n  std::string hack_ca = hack_home + "/../usr/etc/tls/cert.pem";}' \
+  # Inject hack_ca declaration. Signature differs: <3.22 uses const char*,
+  # 3.22+ uses const std::string&.
+  perl -0pi -e 's{std::string cmCurlSetCAInfo\(::CURL\* curl, (const char\*|const std::string\&) cafile\)\n\{\n  std::string e;}{std::string cmCurlSetCAInfo(::CURL* curl, $1 cafile)\n\{\n  std::string e;\n  std::string hack_home;\n  cmSystemTools::GetEnv("HOME", hack_home);\n  std::string hack_ca = hack_home + "/../usr/etc/tls/cert.pem";}' \
       "$ROOTDIR/cmake-$CMAKE_VERSION/Source/cmCurl.cxx" || true
   perl -0pi -e 's{(#  undef CMAKE_CAPATH_COMMON\n)(  \})}{$1    std::string env_ca;\n    if (cmSystemTools::GetEnv("SSL_CERT_FILE", env_ca) \&\&\n        cmSystemTools::FileExists(env_ca, true)) {\n      ::CURLcode res =\n        ::curl_easy_setopt(curl, CURLOPT_CAINFO, env_ca.c_str());\n      check_curl_result(res, "Unable to set TLS/SSL Verify CAINFO: ");\n    } else if (cmSystemTools::GetEnv("SSL_CERT_DIR", env_ca) \&\&\n               cmSystemTools::FileIsDirectory(env_ca)) {\n      ::CURLcode res =\n        ::curl_easy_setopt(curl, CURLOPT_CAPATH, env_ca.c_str());\n      check_curl_result(res, "Unable to set TLS/SSL Verify CAINFO: ");\n    } else if (cmSystemTools::FileExists(hack_ca, true)) {\n      ::CURLcode res =\n        ::curl_easy_setopt(curl, CURLOPT_CAINFO, hack_ca.c_str());\n      check_curl_result(res, "Unable to set TLS/SSL Verify CAINFO: ");\n    }\n$2}s' \
       "$ROOTDIR/cmake-$CMAKE_VERSION/Source/cmCurl.cxx" || true
