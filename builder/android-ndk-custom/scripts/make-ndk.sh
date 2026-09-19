@@ -781,10 +781,13 @@ strip_deps() {
 }
 
 # --- download the matching llvm-custom toolchain ----------------------------
+# LLVM_TAG / LLVM_REV override the default (which tracks the NDK version):
+# use them when the llvm-custom release for this NDK version does not exist
+# (e.g. upstream only publishes llvm-r26; pass LLVM_TAG=llvm-r26 LLVM_REV=r26d).
 fetch_llvm() {
-  local name="${LLVM_PKG}-r${NDK_VERSION}${NDK_REVISION}-${TARGET}"
+  local name="${LLVM_PKG}-${LLVM_REV:-r${NDK_VERSION}${NDK_REVISION}}-${TARGET}"
   log "Fetching LLVM ($name)"
-  fetch_unpack "https://github.com/${REPO_OWNER}/llvm-custom/releases/download/llvm-r${NDK_VERSION}/${name}.tar.xz" \
+  fetch_unpack "https://github.com/${REPO_OWNER}/llvm-custom/releases/download/${LLVM_TAG:-llvm-r${NDK_VERSION}}/${name}.tar.xz" \
     /tmp/llvm-custom.tar.xz "$BUILD"
   HOST_TOOLCHAIN="$BUILD/$name"
 }

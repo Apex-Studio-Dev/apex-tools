@@ -19,6 +19,14 @@ on:
         description: "llvm-custom release owner"
         required: false
         default: HomuHomu833
+      llvm_tag:
+        description: "llvm-custom release tag (empty = llvm-r<ndk_version>)"
+        required: false
+        default: ""
+      llvm_rev:
+        description: "llvm-custom asset revision (empty = r<ndk_version><revision>, e.g. r26d)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -71,6 +79,8 @@ jobs:
             -e NDK_REVISION='${{ inputs.revision }}' \
             -e ROOTDIR=/work/builder/android-ndk-custom \
             -e REPO_OWNER='${{ inputs.llvm_repo_owner }}' \
+            -e LLVM_TAG='${{ inputs.llvm_tag }}' \
+            -e LLVM_REV='${{ inputs.llvm_rev }}' \
             "$IMAGE" \
             bash -c 'scripts/make-ndk.sh'
       - name: Package
