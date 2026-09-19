@@ -288,7 +288,18 @@ sed -i '/auto separator = cm::string_view{/,/}/c\
         this->RegistryFormat.end(1) - this->RegistryFormat.start(1)\
     };\
 }' "$ROOTDIR/cmake-$CMAKE_VERSION/Source/cmWindowsRegistry.cxx" || true
-cp "$ROOTDIR/patches/cmake/cmCurl.cxx" "$ROOTDIR/cmake-$CMAKE_VERSION/Source/cmCurl.cxx"
+# 4.x-only: the patched cmCurl.cxx has the 4.x cmCurlSetCAInfo signature and
+# would not link against <4 callers (they pass const char*). For <4, keep the
+# pristine file and port its CA-discovery fallbacks (SSL_CERT_FILE/DIR +
+# Termux $HOME/../usr/etc/tls/cert.pem) onto the pristine signature instead.
+if [ "$(echo "$CMAKE_VERSION" | cut -d. -f1)" -ge 4 ]; then
+  cp "$ROOTDIR/patches/cmake/cmCurl.cxx" "$ROOTDIR/cmake-$CMAKE_VERSION/Source/cmCurl.cxx"
+else
+  perl -0pi -e 's{std::string cmCurlSetCAInfo\(::CURL\* curl, const char\* cafile\)\n\{\n  std::string e;}{std::string cmCurlSetCAInfo(::CURL* curl, const char* cafile)\n{\n  std::string e;\n  std::string hack_home;\n  cmSystemTools::GetEnv("HOME", hack_home);\n  std::string hack_ca = hack_home + "/../usr/etc/tls/cert.pem";}' \
+      "$ROOTDIR/cmake-$CMAKE_VERSION/Source/cmCurl.cxx" || true
+  perl -0pi -e 's{(#  undef CMAKE_CAPATH_COMMON\n)(  \})}{$1    std::string env_ca;\n    if (cmSystemTools::GetEnv("SSL_CERT_FILE", env_ca) \&\&\n        cmSystemTools::FileExists(env_ca, true)) {\n      ::CURLcode res =\n        ::curl_easy_setopt(curl, CURLOPT_CAINFO, env_ca.c_str());\n      check_curl_result(res, "Unable to set TLS/SSL Verify CAINFO: ");\n    } else if (cmSystemTools::GetEnv("SSL_CERT_DIR", env_ca) \&\&\n               cmSystemTools::FileIsDirectory(env_ca)) {\n      ::CURLcode res =\n        ::curl_easy_setopt(curl, CURLOPT_CAPATH, env_ca.c_str());\n      check_curl_result(res, "Unable to set TLS/SSL Verify CAINFO: ");\n    } else if (cmSystemTools::FileExists(hack_ca, true)) {\n      ::CURLcode res =\n        ::curl_easy_setopt(curl, CURLOPT_CAINFO, hack_ca.c_str());\n      check_curl_result(res, "Unable to set TLS/SSL Verify CAINFO: ");\n    }\n$2}s' \
+      "$ROOTDIR/cmake-$CMAKE_VERSION/Source/cmCurl.cxx" || true
+fi
 
 # cmake forces _TIME_BITS=64 on 32-bit Linux, but zig's 32-bit-glibc libc++ is
 # 32-bit time_t -> chrono::from_time_t won't link. Drop it (musl is always 64-bit).
@@ -319,6 +330,9 @@ case "$PLATFORM" in
     sed -i 's/list(APPEND uv_libraries dl rt)/list(APPEND uv_libraries dl)/' \
         "$ROOTDIR/cmake-$CMAKE_VERSION/Utilities/cmlibuv/CMakeLists.txt" || true
     sed -i 's#src/unix/epoll.c#src/unix/pthread-fixes.c\n    src/unix/epoll.c#' \
+        "$ROOTDIR/cmake-$CMAKE_VERSION/Utilities/cmlibuv/CMakeLists.txt" || true
+    # cmlibuv <1.45 (cmake <3.28) lists linux-core.c instead of epoll.c:
+    sed -i 's#src/unix/linux-core.c#src/unix/pthread-fixes.c\n    src/unix/linux-core.c#' \
         "$ROOTDIR/cmake-$CMAKE_VERSION/Utilities/cmlibuv/CMakeLists.txt" || true
     # bionic has no pthread_getaffinity_np (glibc-only); sched_getaffinity(0,
     # ...) is the equivalent and is in <sched.h> already included here.
