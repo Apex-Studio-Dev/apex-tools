@@ -12,9 +12,9 @@ on:
         required: false
         default: ""
       pkg_version:
-        description: "SDK package version (Pkg.Revision, e.g. 30.0.0)"
-        required: true
-        default: "30.0.0"
+        description: "SDK package version override (empty = Pkg.Revision from the NDK, e.g. 30.0.16248370)"
+        required: false
+        default: ""
       llvm_repo_owner:
         description: "llvm-custom release owner"
         required: false
@@ -88,8 +88,15 @@ jobs:
           set -euo pipefail
           mkdir -p dist
           rev="${{ inputs.revision }}"
-          scripts/make-package.sh ndk '${{ inputs.pkg_version }}' '${{ matrix.host }}' \
-            "builder/android-ndk-custom/android-ndk-r${{ inputs.ndk_version }}${rev}-${{ matrix.target }}.tar.xz"
+          tarball="builder/android-ndk-custom/android-ndk-r${{ inputs.ndk_version }}${rev}-${{ matrix.target }}.tar.xz"
+          pkg_ver='${{ inputs.pkg_version }}'
+          if [ -z "$pkg_ver" ]; then
+            pkg_ver=$(tar -xJOf "$tarball" "android-ndk-r${{ inputs.ndk_version }}${rev}/source.properties" \
+              | sed -n 's/^Pkg.Revision=//p' | head -1)
+          fi
+          [ -n "$pkg_ver" ] || { echo "::error::pkg_version empty and NDK source.properties missing"; exit 1; }
+          echo "$pkg_ver" > dist/pkg-version.txt
+          scripts/make-package.sh ndk "$pkg_ver" '${{ matrix.host }}' "$tarball"
       - uses: actions/upload-artifact@v4
         with:
           name: ndk-${{ matrix.host }}
@@ -104,10 +111,12 @@ jobs:
         with:
           path: dist
           merge-multiple: true
+      - name: Resolve version
+        run: echo "PKG_VER=$(cat dist/pkg-version.txt)" >> "$GITHUB_ENV"
       - uses: ncipollo/release-action@v1.21.0
         with:
-          tag: apex-ndk-${{ inputs.pkg_version }}
-          name: apex-ndk-${{ inputs.pkg_version }}
+          tag: apex-ndk-${{ env.PKG_VER }}
+          name: apex-ndk-${{ env.PKG_VER }}
           allowUpdates: true
           replacesArtifacts: true
-          artifacts: "dist/ndk-${{ inputs.pkg_version }}-*"
+          artifacts: "dist/ndk-${{ env.PKG_VER }}-*"
