@@ -91,10 +91,8 @@ jobs:
           tarball="builder/android-ndk-custom/android-ndk-r${{ inputs.ndk_version }}${rev}-${{ matrix.target }}.tar.xz"
           pkg_ver='${{ inputs.pkg_version }}'
           if [ -z "$pkg_ver" ]; then
-            members=$(tar -tJf "$tarball")
-            prop=$(printf '%s\n' "$members" | grep 'android-ndk-r[^/]*/source\.properties$' | head -1 || true)
-            [ -n "$prop" ] || { echo "::error::NDK source.properties not found in $tarball"; exit 1; }
-            pkg_ver=$(tar -xJOf "$tarball" "$prop" | sed -n 's/^Pkg.Revision=//p' | head -1)
+            [ -f builder/android-ndk-custom/ndk-pkg-version.txt ] || { echo "::error::ndk-pkg-version.txt not written by make-ndk.sh"; exit 1; }
+            pkg_ver=$(cat builder/android-ndk-custom/ndk-pkg-version.txt)
           fi
           [ -n "$pkg_ver" ] || { echo "::error::pkg_version empty and NDK source.properties missing"; exit 1; }
           echo "$pkg_ver" > dist/pkg-version.txt

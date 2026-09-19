@@ -799,7 +799,10 @@ assemble_ndk() {
 
   cd "$NDK"
   /usr/bin/cc "$ROOT/sources/package-generator.c" -o "$BUILD/package-generator"
-  "$BUILD/package-generator" package.xml "$(grep '^Pkg\.Revision =' source.properties | cut -d'=' -f2 | tr -d ' ')"
+  local pkg_rev
+  pkg_rev="$(grep '^Pkg\.Revision =' source.properties | cut -d'=' -f2 | tr -d ' ')"
+  "$BUILD/package-generator" package.xml "$pkg_rev"
+  echo "$pkg_rev" > "$ROOT/ndk-pkg-version.txt"
 }
 
 assemble_unix() {
