@@ -32,11 +32,13 @@ jobs:
           git config user.name "apex-bot"
           git config user.email "actions@github.com"
           git fetch origin catalog || true
+          mv catalog.json catalog.json.new
           if git rev-parse --verify origin/catalog >/dev/null 2>&1; then
             git checkout catalog || git checkout -b catalog origin/catalog
           else
             git checkout --orphan catalog
           fi
+          mv catalog.json.new catalog.json
           git add catalog.json
           git commit -m "catalog: regenerate" || echo "no changes"
           git push origin catalog
