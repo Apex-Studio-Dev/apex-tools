@@ -8,7 +8,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 REPO=${REPO:-$(gh repo view --json nameWithOwner -q .nameWithOwner 2>/dev/null || echo "Apex-Studio-Dev/apex-tools")}
-OUT=${OUT:-catalog/catalog.json}
+OUT=${OUT:-catalog.json}
 mkdir -p "$(dirname "$OUT")"
 
 tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT

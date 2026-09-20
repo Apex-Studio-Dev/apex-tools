@@ -37,6 +37,6 @@ jobs:
           else
             git checkout --orphan catalog
           fi
-          git add catalog/catalog.json
+          git add catalog.json
           git commit -m "catalog: regenerate" || echo "no changes"
           git push origin catalog
