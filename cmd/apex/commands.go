@@ -112,8 +112,10 @@ func cmdInstall(args []string) error {
 			return err
 		}
 		if cur := m.find(pkgPath); cur != nil && cur.Version == pkg.Version && dirExists(mustDir(root, pkgPath)) && !*force {
-			fmt.Printf("skip %s (already installed %s; use --force)\n", pkgPath, cur.Version)
-			continue
+			if !askReplace(pkgPath, cur.Version) {
+				fmt.Printf("skip %s (already installed %s; use --force)\n", pkgPath, cur.Version)
+				continue
+			}
 		}
 		dir, err := pkgDir(root, pkgPath)
 		if err != nil {
@@ -121,7 +123,7 @@ func cmdInstall(args []string) error {
 		}
 		tmp := filepath.Join(os.TempDir(), "apex-dl-"+filepath.Base(pkg.URL))
 		fmt.Printf("downloading %s (%d bytes)...\n", pkg.URL, pkg.Size)
-		if err := downloadToFile(pkg.URL, tmp, pkg.SHA256); err != nil {
+		if err := downloadToFile(pkg.URL, tmp, pkg.SHA256, pkg.Size); err != nil {
 			return err
 		}
 		fmt.Printf("extracting to %s...\n", dir)
@@ -301,4 +303,22 @@ func cmdLicenses(args []string) error {
 		fmt.Println("licenses written to", filepath.Join(root, "licenses"))
 		return nil
 	}
-	return fmt.Errorf("license not accepted")}
+	return fmt.Errorf("license not accepted")
+}
+
+// askReplace asks the user to confirm reinstalling an already-installed
+// package. Non-interactive stdin (CI/pipe) never prompts: returns false.
+func askReplace(pkgPath, version string) bool {
+	st, err := os.Stdin.Stat()
+	if err != nil || st.Mode()&os.ModeCharDevice == 0 {
+		return false
+	}
+	fmt.Printf("%s %s is already installed. Replace? [y/N]: ", pkgPath, version)
+	var ans string
+	fmt.Scanln(&ans)
+	switch strings.ToLower(strings.TrimSpace(ans)) {
+	case "y", "yes":
+		return true
+	}
+	return false
+}

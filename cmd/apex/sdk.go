@@ -13,6 +13,8 @@ import (
 // newXZReader shells out to xz; pure-Go xz is a dependency we avoid.
 // ponytail: requires xz binary (Termux/standard linux both ship it); swap in
 // github.com/ulikunitz/xz when vendoring becomes acceptable.
+// pw is closed only after cmd.Wait(): closing early kills xz mid-stream and
+// yields silent partial extraction.
 func newXZReader(r io.Reader) (io.ReadCloser, error) {
 	path, err := exec.LookPath("xz")
 	if err != nil {
@@ -28,8 +30,8 @@ func newXZReader(r io.Reader) (io.ReadCloser, error) {
 		return nil, err
 	}
 	go func() {
-		pw.Close()
 		cmd.Wait()
+		pw.Close()
 	}()
 	return readCloserPipe{pr, cmd}, nil
 }

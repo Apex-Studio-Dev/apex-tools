@@ -17,6 +17,26 @@ import (
 
 var client = &http.Client{Timeout: 0}
 
+// progressReader prints a realtime download counter on one line.
+type progressReader struct {
+	r     io.Reader
+	total int64
+	done  int64
+}
+
+func (p *progressReader) Read(b []byte) (int, error) {
+	n, err := p.r.Read(b)
+	p.done += int64(n)
+	if p.done >= 1<<20 {
+		if p.total > 0 {
+			fmt.Fprintf(os.Stdout, "\r  %.1f/%.1f MB (%d%%)", float64(p.done)/1e6, float64(p.total)/1e6, p.done*100/p.total)
+		} else {
+			fmt.Fprintf(os.Stdout, "\r  %.1f MB", float64(p.done)/1e6)
+		}
+	}
+	return n, err
+}
+
 func httpGet(url string) ([]byte, error) {
 	resp, err := client.Get(url)
 	if err != nil {
@@ -29,8 +49,10 @@ func httpGet(url string) ([]byte, error) {
 	return io.ReadAll(resp.Body)
 }
 
-// downloadToFile streams url to dest with sha256 verification and 2 retries.
-func downloadToFile(url, dest, wantSHA string) error {
+// downloadToFile streams url to dest with sha256 verification, realtime
+// progress and 2 retries. expected is the catalog-reported size (fallback
+// when the server sends no Content-Length).
+func downloadToFile(url, dest, wantSHA string, expected int64) error {
 	var lastErr error
 	for attempt := 0; attempt < 3; attempt++ {
 		if attempt > 0 {
@@ -52,7 +74,12 @@ func downloadToFile(url, dest, wantSHA string) error {
 			return err
 		}
 		h := sha256.New()
-		n, err := io.Copy(io.MultiWriter(f, h), resp.Body)
+		total := resp.ContentLength
+		if total <= 0 {
+			total = expected
+		}
+		n, err := io.Copy(io.MultiWriter(f, h), &progressReader{r: resp.Body, total: total})
+		fmt.Fprintln(os.Stdout)
 		resp.Body.Close()
 		f.Close()
 		if err != nil {
@@ -111,6 +138,9 @@ func sanitize(dest, name string) (string, error) {
 }
 
 func stripFirst(name string) (string, bool) {
+	for strings.HasPrefix(name, "./") {
+		name = name[2:]
+	}
 	if i := strings.IndexByte(name, '/'); i >= 0 {
 		return name[i+1:], true
 	}
@@ -141,9 +171,13 @@ func extractTar(archive, dest, comp string, strip bool) error {
 		r = gr
 	}
 	tr := tar.NewReader(r)
+	var count int
 	for {
 		hdr, err := tr.Next()
 		if err == io.EOF {
+			if count > 0 {
+				fmt.Println()
+			}
 			return nil
 		}
 		if err != nil {
@@ -187,6 +221,8 @@ func extractTar(archive, dest, comp string, strip bool) error {
 				return err
 			}
 			out.Close()
+			count++
+			fmt.Printf("\r  extracting [%d] %s", count, filepath.Base(target))
 		}
 	}
 }
@@ -197,6 +233,7 @@ func extractZip(archive, dest string, strip bool) error {
 		return err
 	}
 	defer zr.Close()
+	zipCount := 0
 	for _, zf := range zr.File {
 		name := zf.Name
 		if strip {
@@ -234,6 +271,8 @@ func extractZip(archive, dest string, strip bool) error {
 		if err != nil {
 			return err
 		}
+		zipCount++
+		fmt.Printf("\r  extracting [%d] %s", zipCount, filepath.Base(target))
 	}
 	return nil
 }

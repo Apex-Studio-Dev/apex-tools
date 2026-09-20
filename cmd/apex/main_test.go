@@ -7,7 +7,10 @@ import (
 )
 
 func TestGreater(t *testing.T) {
-	cases := []struct{ a, b string; want bool }{
+	cases := []struct {
+		a, b string
+		want bool
+	}{
 		{"34.0.0", "33.0.2", true},
 		{"37.2", "37.1.9", true},
 		{"android-34", "android-33", true},
