@@ -119,7 +119,7 @@ func cmdInstall(args []string) error {
 		if err != nil {
 			return err
 		}
-		tmp := filepath.Join(os.TempDir(), "apex-dl-"+strings.ReplaceAll(pkgPath, ";", "-")+".archive")
+		tmp := filepath.Join(os.TempDir(), "apex-dl-"+filepath.Base(pkg.URL))
 		fmt.Printf("downloading %s (%d bytes)...\n", pkg.URL, pkg.Size)
 		if err := downloadToFile(pkg.URL, tmp, pkg.SHA256); err != nil {
 			return err
