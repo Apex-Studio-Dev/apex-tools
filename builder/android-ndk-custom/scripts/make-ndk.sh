@@ -315,11 +315,11 @@ build_make() {
     local args=( --prefix="$PWD/build" --build=x86_64-linux-gnu --host="$TARGET"
                  CC="$CROSS_CC" CXX="$CROSS_CXX" LD="$CROSS_LD" OBJCOPY="$CROSS_OBJCOPY" AR="$CROSS_AR" RANLIB="$CROSS_RANLIB" STRIP="$CROSS_STRIP" )
     case "$PLATFORM" in
-      bionic)  args+=( --disable-posix-spawn
+      bionic)  args+=( --disable-posix-spawn --disable-load
                        CFLAGS="-O2 -Wno-error=implicit-function-declaration"
                        CXXFLAGS="-O2 -Wno-error=implicit-function-declaration"
                       LDFLAGS="-static -Wl,--undefined-version"
-                       ac_cv_header_dlfcn_h=no ac_cv_lib_elf_elf_begin=no am_cv_func_iconv=no ac_cv_func_pselect=yes ) ;;
+                       ac_cv_lib_elf_elf_begin=no am_cv_func_iconv=no ac_cv_func_pselect=yes ) ;;
       linux)   args+=( CFLAGS="-O2 -Wno-error=incompatible-pointer-types $CROSS_CFLAGS"
                        CXXFLAGS="-O2 -Wno-error=incompatible-pointer-types $CROSS_CFLAGS"
                        LDFLAGS="$CROSS_LDFLAGS" )
