@@ -822,6 +822,20 @@ assemble_unix() {
     fi
   done
 
+  # official NDK keeps clang as a symlink -> clang-18; the -type f sweep above
+  # deletes it (rebuilt toolchain names the compiler `clang`, so no same-name
+  # match). Restore the compiler binary afterwards.
+  if [ ! -e "$NDK_TOOLCHAIN/bin/clang-18" ]; then
+    if [ -f "$HOST_TOOLCHAIN/bin/clang-18" ]; then
+      echo "Restoring clang-18"; cp "$HOST_TOOLCHAIN/bin/clang-18" "$NDK_TOOLCHAIN/bin/clang-18"
+    elif [ -f "$HOST_TOOLCHAIN/bin/clang" ]; then
+      echo "Restoring clang-18 (from clang)"; cp "$HOST_TOOLCHAIN/bin/clang" "$NDK_TOOLCHAIN/bin/clang-18"
+    else
+      echo "::error::no clang binary in rebuilt toolchain" >&2; exit 1
+    fi
+  fi
+  [ -e "$NDK_TOOLCHAIN/bin/clang" ] || ln -sf clang-18 "$NDK_TOOLCHAIN/bin/clang"
+
   sed -i 's,#!/usr/bin/env bash,#!/usr/bin/env sh,' "$NDK/build/tools/ndk_bin_common.sh" "$NDK/build/tools/make_standalone_toolchain.py" "$NDK/build/ndk-build"
   sed -i 's,#!/bin/bash,#!/bin/sh,' "$PREBUILT_BIN/ndk-stack" "$PREBUILT_BIN/ndk-which"
   cp "$ROOT/patches/ndk/scripts/clang-tidy.sh" "$NDK_TOOLCHAIN/bin"
