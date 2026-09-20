@@ -1,0 +1,42 @@
+name: Catalog
+
+# Regenerate catalog.json from releases and push to the `catalog` branch
+# (served raw at https://raw.githubusercontent.com/Apex-Studio-Dev/apex-tools/catalog/catalog.json).
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  gen:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+      - name: Regenerate catalog
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          scripts/build-cli.sh
+          APEX_VERSION=$(git describe --tags --always 2>/dev/null || echo 0.1.0) scripts/build-cli.sh
+          scripts/gen-catalog.sh
+      - name: Push to catalog branch
+        run: |
+          git config user.name "apex-bot"
+          git config user.email "actions@github.com"
+          git fetch origin catalog || true
+          if git rev-parse --verify origin/catalog >/dev/null 2>&1; then
+            git checkout catalog || git checkout -b catalog origin/catalog
+          else
+            git checkout --orphan catalog
+          fi
+          git add catalog/catalog.json
+          git commit -m "catalog: regenerate" || echo "no changes"
+          git push origin catalog

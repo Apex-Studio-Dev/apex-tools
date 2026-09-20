@@ -1,0 +1,132 @@
+name: Build SDK (platforms / build-tools / platform-tools)
+
+on:
+  workflow_dispatch:
+    inputs:
+      versions:
+        description: "JSON array of versions (platform-tools use platform-tools version)"
+        required: true
+        default: '["34"]'
+      kind:
+        description: "platforms | build-tools | platform-tools; build-tools: ONE version per dispatch; platform-tools: use real version number (e.g. 35.0.2), not 'latest'"
+        required: true
+        default: platforms
+      tag:
+        description: "AOSP source tag"
+        required: true
+        default: android-17.0.0_r1
+      build_tools_version:
+        required: false
+        default: "37.0.0"
+      ndk_version:
+        required: false
+        default: "27"
+      ndk_revision:
+        required: false
+        default: d
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: aarch64-linux-android
+            host: linux-arm64
+          - target: armv7a-linux-androideabi
+            host: linux-arm
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: easimon/maximize-build-space@v10
+        with:
+          root-reserve-mb: 5120
+          swap-size-mb: 5120
+          remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+          remove-docker-images: "true"
+      - uses: actions/checkout@v5
+      - uses: docker/login-action@v4.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker data-root into build space
+        run: |
+          sudo systemctl stop docker.socket docker.service
+          sudo mv /var/lib/docker "$GITHUB_WORKSPACE/.docker-lib"
+          sudo mkdir -p /etc/docker
+          echo '{"data-root":"'"$GITHUB_WORKSPACE"'/.docker-lib"}' | sudo tee /etc/docker/daemon.json
+          sudo systemctl start docker
+      - name: Build SDK splice
+        run: |
+          IMAGE="ghcr.io/apex-studio-dev/sdk-builder:latest"
+          BT='${{ inputs.build_tools_version }}'
+          PLATS=''
+          if [ '${{ inputs.kind }}' = platforms ]; then
+            PLATS=$(echo '${{ inputs.versions }}' | jq -r 'join(" ")')
+          elif [ '${{ inputs.kind }}' = build-tools ]; then
+            BT=$(echo '${{ inputs.versions }}' | jq -r '.[0]')
+          fi
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE:/work" -w /work/builder/android-sdk-custom --user "$(id -u):$(id -g)" \
+            -e HOME=/work \
+            -e PLATFORM=bionic \
+            -e TARGET=${{ matrix.target }} \
+            -e TAG='${{ inputs.tag }}' \
+            -e BUILD_TOOLS_VERSION="$BT" \
+            -e NDK_VERSION='${{ inputs.ndk_version }}' \
+            -e NDK_REVISION='${{ inputs.ndk_revision }}' \
+            -e ROOTDIR=/work/builder/android-sdk-custom \
+            -e PLATFORMS="$PLATS" \
+            "$IMAGE" \
+            bash -c 'scripts/fetch-source.sh && scripts/build.sh && scripts/make-sdk.sh'
+      - name: Split + package all versions
+        run: |
+          set -euo pipefail
+          export TMPDIR="$GITHUB_WORKSPACE/tmp"
+          mkdir -p split dist "$TMPDIR"
+          BT=$(echo '${{ inputs.versions }}' | jq -r '.[0]')
+          for ver in $(echo '${{ inputs.versions }}' | jq -r '.[]'); do
+            if [ '${{ inputs.kind }}' = build-tools ] && [ "$ver" != "$BT" ]; then
+              echo "skip build-tools $ver (splice carries $BT only; one version per dispatch)"
+              continue
+            fi
+            echo "=== ${{ inputs.kind }} $ver (${{ matrix.host }})"
+            scripts/split-sdk.sh "builder/android-sdk-custom/android-sdk-${{ matrix.target }}.tar.xz" '${{ inputs.kind }}' "$ver"
+            scripts/make-package.sh '${{ inputs.kind }}' "$ver" '${{ matrix.host }}' "split/${{ inputs.kind }}-$ver.tar.xz"
+            rm -f "split/${{ inputs.kind }}-$ver.tar.xz"
+            rm -rf "$TMPDIR"/*
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.kind }}-${{ matrix.host }}
+          path: dist/*
+          retention-days: 1
+
+  release:
+    needs: build
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        ver: ${{ fromJSON(inputs.versions) }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Release ${{ matrix.ver }}
+        if: ${{ inputs.kind != 'build-tools' || matrix.ver == fromJSON(inputs.versions)[0] }}
+        uses: ncipollo/release-action@v1.21.0
+        with:
+          tag: apex-${{ inputs.kind }}-${{ matrix.ver }}
+          name: apex-${{ inputs.kind }}-${{ matrix.ver }}
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: "dist/${{ inputs.kind }}-${{ matrix.ver }}-*"

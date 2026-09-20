@@ -1,0 +1,11 @@
+APEX TOOLS SDK LICENSE
+
+This software package is part of apex-tools, a custom Android SDK
+distribution maintained by Apex-Studio-Dev. Components are derived from the
+Android Open Source Project and repackaged for aarch64/arm hosts.
+
+By accepting, you agree to the terms in the LICENSE file shipped with
+apex-tools and acknowledge that the underlying components remain subject
+to their upstream licenses (Apache-2.0 for AOSP-derived code).
+
+Copyright (c) 2026 Apex-Studio-Dev

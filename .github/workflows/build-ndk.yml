@@ -1,0 +1,122 @@
+name: Build NDK package
+
+on:
+  workflow_dispatch:
+    inputs:
+      ndk_version:
+        description: "NDK version number (e.g. 30)"
+        required: true
+        default: "30"
+      revision:
+        description: "Revision letter (empty for final)"
+        required: false
+        default: ""
+      pkg_version:
+        description: "SDK package version override (empty = Pkg.Revision from the NDK, e.g. 30.0.16248370)"
+        required: false
+        default: ""
+      llvm_repo_owner:
+        description: "llvm-custom release owner"
+        required: false
+        default: HomuHomu833
+      llvm_tag:
+        description: "llvm-custom release tag (empty = llvm-r<ndk_version>)"
+        required: false
+        default: ""
+      llvm_rev:
+        description: "llvm-custom asset revision (empty = r<ndk_version><revision>, e.g. r26d)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: aarch64-linux-android
+            host: linux-arm64
+          - target: armv7a-linux-androideabi
+            host: linux-arm
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: easimon/maximize-build-space@v10
+        with:
+          root-reserve-mb: 5120
+          swap-size-mb: 5120
+          remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+          remove-docker-images: "true"
+      - uses: actions/checkout@v5
+      - uses: docker/login-action@v4.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker data-root into build space
+        run: |
+          sudo systemctl stop docker.socket docker.service
+          sudo mv /var/lib/docker "$GITHUB_WORKSPACE/.docker-lib"
+          sudo mkdir -p /etc/docker
+          echo '{"data-root":"'"$GITHUB_WORKSPACE"'/.docker-lib"}' | sudo tee /etc/docker/daemon.json
+          sudo systemctl start docker
+      - name: Build NDK
+        working-directory: builder/android-ndk-custom
+        run: |
+          IMAGE="ghcr.io/apex-studio-dev/ndk-builder:latest"
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE:/work" -w /work/builder/android-ndk-custom --user "$(id -u):$(id -g)" \
+            -e HOME=/work \
+            -e PLATFORM=bionic \
+            -e TARGET=${{ matrix.target }} \
+            -e NDK_VERSION='${{ inputs.ndk_version }}' \
+            -e NDK_REVISION='${{ inputs.revision }}' \
+            -e ROOTDIR=/work/builder/android-ndk-custom \
+            -e REPO_OWNER='${{ inputs.llvm_repo_owner }}' \
+            -e LLVM_TAG='${{ inputs.llvm_tag }}' \
+            -e LLVM_REV='${{ inputs.llvm_rev }}' \
+            "$IMAGE" \
+            bash -c 'scripts/make-ndk.sh'
+      - name: Package
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          rev="${{ inputs.revision }}"
+          tarball="builder/android-ndk-custom/android-ndk-r${{ inputs.ndk_version }}${rev}-${{ matrix.target }}.tar.xz"
+          pkg_ver='${{ inputs.pkg_version }}'
+          if [ -z "$pkg_ver" ]; then
+            [ -f builder/android-ndk-custom/ndk-pkg-version.txt ] || { echo "::error::ndk-pkg-version.txt not written by make-ndk.sh"; exit 1; }
+            pkg_ver=$(cat builder/android-ndk-custom/ndk-pkg-version.txt)
+          fi
+          [ -n "$pkg_ver" ] || { echo "::error::pkg_version empty and NDK source.properties missing"; exit 1; }
+          echo "$pkg_ver" > dist/pkg-version.txt
+          scripts/make-package.sh ndk "$pkg_ver" '${{ matrix.host }}' "$tarball"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ndk-${{ matrix.host }}
+          path: dist/*
+          retention-days: 1
+
+  release:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Resolve version
+        run: echo "PKG_VER=$(cat dist/pkg-version.txt)" >> "$GITHUB_ENV"
+      - uses: ncipollo/release-action@v1.21.0
+        with:
+          tag: apex-ndk-${{ env.PKG_VER }}
+          name: apex-ndk-${{ env.PKG_VER }}
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: "dist/ndk-${{ env.PKG_VER }}-*"

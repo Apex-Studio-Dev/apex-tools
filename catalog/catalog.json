@@ -1,0 +1,1041 @@
+{
+  "schema": 1,
+  "generated": "2026-09-20T13:49:59Z",
+  "min_cli": "0.1.0",
+  "packages": [
+    {
+      "path": "build-tools;33.0.0",
+      "version": "33.0.0",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-33.0.0/build-tools-33.0.0-linux-arm.tar.xz",
+      "sha256": "f54b60fa4186f10201073954c48de40dea70f142e0385d71f3e90269301aa466",
+      "size": 11786988,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;33.0.0",
+      "version": "33.0.0",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-33.0.0/build-tools-33.0.0-linux-arm64.tar.xz",
+      "sha256": "4e09004e911390ccc589e31bf18b51dc0ac0ce494ee8f56bf2bc75fc75631c69",
+      "size": 13001700,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;33.0.1",
+      "version": "33.0.1",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-33.0.1/build-tools-33.0.1-linux-arm.tar.xz",
+      "sha256": "9b6ce8cd9060250af31829f7b4c3a50a6da249fe36fcb6aed1c23e8b08989ef7",
+      "size": 12193892,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;33.0.1",
+      "version": "33.0.1",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-33.0.1/build-tools-33.0.1-linux-arm64.tar.xz",
+      "sha256": "34d31b3a12fcf44e02d2703b98f164edc851ad078b866abcfb0c6e38306c7210",
+      "size": 14041748,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;33.0.2",
+      "version": "33.0.2",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-33.0.2/build-tools-33.0.2-linux-arm.tar.xz",
+      "sha256": "0fb850241af95f014595b4566e66034513fc8089eb26ceb15335dc20cf0ce5c6",
+      "size": 11791308,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;33.0.2",
+      "version": "33.0.2",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-33.0.2/build-tools-33.0.2-linux-arm64.tar.xz",
+      "sha256": "5aff22036ac366ad0718fea6c960812159efad7f78f502c4f3c392017851d840",
+      "size": 12749028,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;33.0.3",
+      "version": "33.0.3",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-33.0.3/build-tools-33.0.3-linux-arm.tar.xz",
+      "sha256": "0a8a0844bba64c22e5105cee63a10bc67980f35410683158c7a9d6bbcdb2e03a",
+      "size": 11981684,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;33.0.3",
+      "version": "33.0.3",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-33.0.3/build-tools-33.0.3-linux-arm64.tar.xz",
+      "sha256": "eaf97f612a2aaec917e1c8a260fcb8f50237ce2d8ca1d8c1ffdb8d2b390928ef",
+      "size": 13280880,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;34.0.0",
+      "version": "34.0.0",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-34.0.0/build-tools-34.0.0-linux-arm.tar.xz",
+      "sha256": "7ce5d6b14c68d0d4be9b1ae8642c1bba98d25bb474ca6ba9700b817ffc02afb3",
+      "size": 14491896,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;34.0.0",
+      "version": "34.0.0",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-34.0.0/build-tools-34.0.0-linux-arm64.tar.xz",
+      "sha256": "152f201eb9c1a34f514c1e2627bae55287edfad262ba7dfe9be38df6315e642d",
+      "size": 14473700,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;35.0.0",
+      "version": "35.0.0",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-35.0.0/build-tools-35.0.0-linux-arm.tar.xz",
+      "sha256": "7c1622678ce4af3f295c484391300f156caeeaf6edcb13446e34f10f3aadedd9",
+      "size": 15538672,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;35.0.0",
+      "version": "35.0.0",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-35.0.0/build-tools-35.0.0-linux-arm64.tar.xz",
+      "sha256": "ba36bd81ce4475642f7d316d88504bbed75fd6ca26f11a80ab1a04cb361b16ed",
+      "size": 16438520,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;35.0.1",
+      "version": "35.0.1",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-35.0.1/build-tools-35.0.1-linux-arm.tar.xz",
+      "sha256": "52429901edceab75cf13118670934cdebbf23bc3048efaac224d4169ee654387",
+      "size": 16546532,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;35.0.1",
+      "version": "35.0.1",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-35.0.1/build-tools-35.0.1-linux-arm64.tar.xz",
+      "sha256": "14a501aeecf1afbc7f75f1472d4ab0c7be58ea675145d7cff73e9bef3e0d0e64",
+      "size": 16349772,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;36.0.0",
+      "version": "36.0.0",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-36.0.0/build-tools-36.0.0-linux-arm.tar.xz",
+      "sha256": "114ae1f5dda407c904086a6f63bb84f315f90c4e3b3a00b5fb42d5d6348a6660",
+      "size": 17639420,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;36.0.0",
+      "version": "36.0.0",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-36.0.0/build-tools-36.0.0-linux-arm64.tar.xz",
+      "sha256": "88585cde8514ddb7570c926dc2b6b146b6be2b3c80410aa71edce9d64bd5d9b0",
+      "size": 18342572,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;36.1.0",
+      "version": "36.1.0",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-36.1.0/build-tools-36.1.0-linux-arm.tar.xz",
+      "sha256": "c86cab2cf43b9f52c1dad0cf2f5b05387376100a9553da96f0562bfb1aacdc34",
+      "size": 17436192,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;36.1.0",
+      "version": "36.1.0",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-36.1.0/build-tools-36.1.0-linux-arm64.tar.xz",
+      "sha256": "1de52a6c926ed11209768cff2b4d29e2a3286d795c800ada494c927703811f9b",
+      "size": 19406288,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;37.0.0",
+      "version": "37.0.0",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-37.0.0/build-tools-37.0.0-linux-arm.tar.xz",
+      "sha256": "23daa42a5fc864f254b6860ce590a393d282e7ae41cb5c10c46de0d1ff67beef",
+      "size": 19477720,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "build-tools;37.0.0",
+      "version": "37.0.0",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-build-tools-37.0.0/build-tools-37.0.0-linux-arm64.tar.xz",
+      "sha256": "829dc74d3dcf75548bbe83ae82fe7fd2d319a54f8a8f4d40f5387ac130b45068",
+      "size": 20772240,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.18.1",
+      "version": "3.18.1",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.18.1/cmake-3.18.1-linux-arm.tar.xz",
+      "sha256": "f7cfc41fbaf17ea94f50530d1f1b91a71ee50601d4d3edcca2d67e757ce04f99",
+      "size": 17053824,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.18.1",
+      "version": "3.18.1",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.18.1/cmake-3.18.1-linux-arm64.tar.xz",
+      "sha256": "f2159d2b0282f02b27ae0f742806fd9854668064c996d21422c680197d6fc6e4",
+      "size": 19221380,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.22.1",
+      "version": "3.22.1",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.22.1/cmake-3.22.1-linux-arm.tar.xz",
+      "sha256": "85fa2174c67eac8a6b7b8c40fdd5dde632751642485546c2c77106990ce03c30",
+      "size": 18328668,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.22.1",
+      "version": "3.22.1",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.22.1/cmake-3.22.1-linux-arm64.tar.xz",
+      "sha256": "c9b943a283c5fb45dc6a60ff80b16429093d478f7a9e5adf41536fd10316bc7f",
+      "size": 20301800,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.30.3",
+      "version": "3.30.3",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.30.3/cmake-3.30.3-linux-arm.tar.xz",
+      "sha256": "61bd53f9be3a498048611070ee8dc218d49a9184435d8ff7a13b65e18acee208",
+      "size": 20623404,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.30.3",
+      "version": "3.30.3",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.30.3/cmake-3.30.3-linux-arm64.tar.xz",
+      "sha256": "f8af670d1b3687ae2ac1e517913feeccfa26c2f782d9b53ec27a5bbc1bbeb3e3",
+      "size": 22747500,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.30.4",
+      "version": "3.30.4",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.30.4/cmake-3.30.4-linux-arm.tar.xz",
+      "sha256": "db8b02588e64972a1c12cbccfc20bbe4f0798faa89b2818dd4cbf003fe7a8dda",
+      "size": 20615788,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.30.4",
+      "version": "3.30.4",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.30.4/cmake-3.30.4-linux-arm64.tar.xz",
+      "sha256": "78a0156ce5c193af18cea207c253889a16368ed9de09e4dc4946106d3565dac1",
+      "size": 22772112,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.30.5",
+      "version": "3.30.5",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.30.5/cmake-3.30.5-linux-arm.tar.xz",
+      "sha256": "3e4fe5964af95cb9346801df75607debb72d4162e9da9e3f0281929f29a69fce",
+      "size": 20617536,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.30.5",
+      "version": "3.30.5",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.30.5/cmake-3.30.5-linux-arm64.tar.xz",
+      "sha256": "674b482dd69c9c382a0369df5fa7fb0aeb580d9497b7384a2582fcd46802b81b",
+      "size": 22751240,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.0",
+      "version": "3.31.0",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.0/cmake-3.31.0-linux-arm.tar.xz",
+      "sha256": "43e505bcfcdc8a6c72cd9682eadee76efb6db4ede6df363b54ee115c4bc76d95",
+      "size": 20956444,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.0",
+      "version": "3.31.0",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.0/cmake-3.31.0-linux-arm64.tar.xz",
+      "sha256": "a0d51afe129b96662bbeb6e24bcda301fd12a6842707b3bc019bd51ae7664ee2",
+      "size": 23093680,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.1",
+      "version": "3.31.1",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.1/cmake-3.31.1-linux-arm.tar.xz",
+      "sha256": "3475d9bae930aa29234b70da5d0c538b07bb7dd821c767d507b16d2ca0fe777c",
+      "size": 20961060,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.1",
+      "version": "3.31.1",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.1/cmake-3.31.1-linux-arm64.tar.xz",
+      "sha256": "9c673f8fd01128d7449c5a3ff35ab39895acf6a70e62db47ac74336103cf63c4",
+      "size": 23092428,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.4",
+      "version": "3.31.4",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.4/cmake-3.31.4-linux-arm.tar.xz",
+      "sha256": "2ad47527424f33b19de9324ce332a7bde98d35ddf260b62fab7093d9d2f754ac",
+      "size": 20961544,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.4",
+      "version": "3.31.4",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.4/cmake-3.31.4-linux-arm64.tar.xz",
+      "sha256": "ca4ec5cc7aaaa90e206d1c37ccc6cc280396e6d48cd1f7e8563c231a9e0491c7",
+      "size": 23096660,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.5",
+      "version": "3.31.5",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.5/cmake-3.31.5-linux-arm.tar.xz",
+      "sha256": "9a44579b6e39e98ac299fec22d46ad67a03a4a792d2c437fdda8b0fee08f64a6",
+      "size": 20960360,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.5",
+      "version": "3.31.5",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.5/cmake-3.31.5-linux-arm64.tar.xz",
+      "sha256": "5680887677490c3d1243d09464c1d499fe0d349a0224e3dfa5e1f31bfebf79a1",
+      "size": 23098516,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.6",
+      "version": "3.31.6",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.6/cmake-3.31.6-linux-arm.tar.xz",
+      "sha256": "7dbbdbf7c33b0f47fab4b5c781124452a1bb37153056f3d5af0bccddb90e5952",
+      "size": 20963996,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;3.31.6",
+      "version": "3.31.6",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-3.31.6/cmake-3.31.6-linux-arm64.tar.xz",
+      "sha256": "53f721396cfe4924606a139f5c832b786894d8a1d5fa7a829c1cd134561fbbaf",
+      "size": 23108012,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.0.2",
+      "version": "4.0.2",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.0.2/cmake-4.0.2-linux-arm.tar.xz",
+      "sha256": "618bb07250b123b039b3b511e30040ff3e1c5fbbfb40ff4c6060f2db9f677858",
+      "size": 21104540,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.0.2",
+      "version": "4.0.2",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.0.2/cmake-4.0.2-linux-arm64.tar.xz",
+      "sha256": "f4561a67e0fc04cbe6730d9678ba3170cf7d9d9f48f114330c76d345d19a3b3c",
+      "size": 23239100,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.0.3",
+      "version": "4.0.3",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.0.3/cmake-4.0.3-linux-arm.tar.xz",
+      "sha256": "d5463828067c8f535c1a2dd626c31bd36cb082bf0c8f699c7877445f1faec7b2",
+      "size": 21103776,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.0.3",
+      "version": "4.0.3",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.0.3/cmake-4.0.3-linux-arm64.tar.xz",
+      "sha256": "03633c839f51f12f7aeb6a02055da4068e6f0d83d78acfcf96d05e65c8d73925",
+      "size": 23239804,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.1.0",
+      "version": "4.1.0",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.1.0/cmake-4.1.0-linux-arm.tar.xz",
+      "sha256": "3e8de067cdfb6257cd22b6e38229f3392f926937e153b072f507bca0616d9424",
+      "size": 21304268,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.1.0",
+      "version": "4.1.0",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.1.0/cmake-4.1.0-linux-arm64.tar.xz",
+      "sha256": "5fdc36c4f6a5dfafb33a20506132faacbc073d08f8279b9e5731dae06b04119e",
+      "size": 23431584,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.1.1",
+      "version": "4.1.1",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.1.1/cmake-4.1.1-linux-arm.tar.xz",
+      "sha256": "bc1381103eca7b627acb1c3bd0981519ab18329983d07db9786ca0600555731f",
+      "size": 21309068,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.1.1",
+      "version": "4.1.1",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.1.1/cmake-4.1.1-linux-arm64.tar.xz",
+      "sha256": "b454f928990803dc524fbbd110bbf2c19d0c67149c1e00c61e494d2f69297794",
+      "size": 23432368,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.1.2",
+      "version": "4.1.2",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.1.2/cmake-4.1.2-linux-arm.tar.xz",
+      "sha256": "dd995648344ec7b9dbd9a6952d683248583f3706f5c3ffcb6fa91cbc8fa93c87",
+      "size": 21308088,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "cmake;4.1.2",
+      "version": "4.1.2",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-cmake-4.1.2/cmake-4.1.2-linux-arm64.tar.xz",
+      "sha256": "45dd499ea3946bb93a175aa622987239f9b6916cdc60523b1178025112423ea9",
+      "size": 23435964,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;26.0.10792818",
+      "version": "26.0.10792818",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.0.10792818/ndk-26.0.10792818-linux-arm.tar.xz",
+      "sha256": "6f22b43f2bc6d82d6fe74d5ea8cf20de6a388afc92c4508bd957f675daca2d8b",
+      "size": 199060092,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;26.0.10792818",
+      "version": "26.0.10792818",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.0.10792818/ndk-26.0.10792818-linux-arm64.tar.xz",
+      "sha256": "0bf1c442fcd33162c2981494473c0e95ae067c42062c6536e6645f526f04047c",
+      "size": 200279212,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;26.1.10909125",
+      "version": "26.1.10909125",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.1.10909125/ndk-26.1.10909125-linux-arm.tar.xz",
+      "sha256": "708b676321b04edf953615bd8565dce23183f54f6385a89d2d7805c3e3187a08",
+      "size": 199059328,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;26.1.10909125",
+      "version": "26.1.10909125",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.1.10909125/ndk-26.1.10909125-linux-arm64.tar.xz",
+      "sha256": "4f10b09aa583a7f91ef8d8f18fc404df0c3f68a22e7cdc93d5308ce233d50083",
+      "size": 200315784,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;26.2.11394342",
+      "version": "26.2.11394342",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.2.11394342/ndk-26.2.11394342-linux-arm.tar.xz",
+      "sha256": "d15f251aa3fbd1e2729d8919562dc184fd29172c5e7dd1e558b3612755afb916",
+      "size": 199039464,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;26.2.11394342",
+      "version": "26.2.11394342",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.2.11394342/ndk-26.2.11394342-linux-arm64.tar.xz",
+      "sha256": "f3b78407eaec41559cbd65d61780fb77e671b24ce3765b8133f1e539aac20fac",
+      "size": 200297036,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;26.3.11579264",
+      "version": "26.3.11579264",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.3.11579264/ndk-26.3.11579264-linux-arm.tar.xz",
+      "sha256": "b7247995eaa948a4b31ca691a5d528467752b0923c0c94a483cfad3f559ab3e8",
+      "size": 199042816,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;26.3.11579264",
+      "version": "26.3.11579264",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.3.11579264/ndk-26.3.11579264-linux-arm64.tar.xz",
+      "sha256": "4dba6826afecdb2c29a3bdc5385428ccac8ad66b82c78e6fd66641226d9dc7ab",
+      "size": 200325556,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;27.3.13750724",
+      "version": "27.3.13750724",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.3.13750724/ndk-27.3.13750724-linux-arm.tar.xz",
+      "sha256": "5870ad434dbce46a219b16e6eae1f83b99e53f1101ca8cfefaa7b598e0cb9af0",
+      "size": 214326112,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;27.3.13750724",
+      "version": "27.3.13750724",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.3.13750724/ndk-27.3.13750724-linux-arm64.tar.xz",
+      "sha256": "8175d3e082ff8ca6099d5583dfddae2b965619bcb4edd46f635a4271951f3a0f",
+      "size": 216192624,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;28.0.13004108",
+      "version": "28.0.13004108",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.0.13004108/ndk-28.0.13004108-linux-arm.tar.xz",
+      "sha256": "287b6732083fefcfa68b9b820daf023eadb1b5cbb120f1f556c0afa5c5eea4c2",
+      "size": 239112448,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;28.0.13004108",
+      "version": "28.0.13004108",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.0.13004108/ndk-28.0.13004108-linux-arm64.tar.xz",
+      "sha256": "e5f1d44c302ac77c6d62af75e787ee01fafcaa58bf52f46bbbd5c83d89fd0317",
+      "size": 243477556,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;28.1.13356709",
+      "version": "28.1.13356709",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.1.13356709/ndk-28.1.13356709-linux-arm.tar.xz",
+      "sha256": "e7dd560d66e408e465110b2ad374de8e491cf1a075a1427ffa93ad43325ca2df",
+      "size": 238633964,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;28.1.13356709",
+      "version": "28.1.13356709",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.1.13356709/ndk-28.1.13356709-linux-arm64.tar.xz",
+      "sha256": "dacc7a4270c0c8c6bc7f26389fa2e00860077d76e15dfe9ef6749a4eb053f836",
+      "size": 241648560,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;28.2.13676358",
+      "version": "28.2.13676358",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.2.13676358/ndk-28.2.13676358-linux-arm.tar.xz",
+      "sha256": "5d364d9d427405fea96d0934dc91f8897023b88d22191aba9357927b65134312",
+      "size": 238637860,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;28.2.13676358",
+      "version": "28.2.13676358",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.2.13676358/ndk-28.2.13676358-linux-arm64.tar.xz",
+      "sha256": "c8112f91e318e8a513dc05a9ef88666e2615d39c4865c3a14cb31d9a027f157e",
+      "size": 241630412,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;29.0.14206865",
+      "version": "29.0.14206865",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-29.0.14206865/ndk-29.0.14206865-linux-arm.tar.xz",
+      "sha256": "e07cc50455f4905d28f03e04d73d7385fde9ec280d4be226d15e65f5f8a92dde",
+      "size": 253631924,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;29.0.14206865",
+      "version": "29.0.14206865",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-29.0.14206865/ndk-29.0.14206865-linux-arm64.tar.xz",
+      "sha256": "a81fd93a3ff40e11a31f8067ae2886e227a60bae75de5f321a8580344bfd83db",
+      "size": 255212816,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;30.0.16248370",
+      "version": "30.0.16248370",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-30.0.16248370/ndk-30.0.16248370-linux-arm.tar.xz",
+      "sha256": "b4914d46836c1114019351ad86efbd245588f21722427069c70172543e1845c4",
+      "size": 283393032,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;30.0.16248370",
+      "version": "30.0.16248370",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-30.0.16248370/ndk-30.0.16248370-linux-arm64.tar.xz",
+      "sha256": "3acfdd11ec1af38afd9cbd804b7e526408c0d67a80c688e98d747b90d0fc9b1e",
+      "size": 284366212,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platform-tools;37.0.1",
+      "version": "37.0.1",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platform-tools-37.0.1/platform-tools-37.0.1-linux-arm.tar.xz",
+      "sha256": "8d4d22c641eccfe820734b124165b706d4076d9682b62142dac44f5ddd7f9f3f",
+      "size": 5379260,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platform-tools;37.0.1",
+      "version": "37.0.1",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platform-tools-37.0.1/platform-tools-37.0.1-linux-arm64.tar.xz",
+      "sha256": "44fb068b7f391c46f0bb8d600f584bf0f6b69d3fdb3a68e359a5b9a7ee083098",
+      "size": 6019396,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-30",
+      "version": "30",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-30/platforms-30-linux-arm.tar.xz",
+      "sha256": "912c1034299625a2c22457e5d802b671a762b5d02b1825d0323f7217c283a0db",
+      "size": 39183156,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-30",
+      "version": "30",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-30/platforms-30-linux-arm64.tar.xz",
+      "sha256": "6d2059a5b00b8f5c8048ea2cc788a8fb5178041948f78039b0d3f07b3d2b90bd",
+      "size": 39184272,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-31",
+      "version": "31",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-31/platforms-31-linux-arm.tar.xz",
+      "sha256": "4443afe96b377030ddd35048ce84b776588b0b2455e638de1241af8478a6aa17",
+      "size": 43158948,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-31",
+      "version": "31",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-31/platforms-31-linux-arm64.tar.xz",
+      "sha256": "c2dcf3318ff3334e6e22aa5b3aa2370b78d2c1c1cbd9c163090b1d74fb340ac3",
+      "size": 43187940,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-32",
+      "version": "32",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-32/platforms-32-linux-arm.tar.xz",
+      "sha256": "a68288e2bded14210df6de0beaf469fe7abb049a24043b9a159391fe85da4154",
+      "size": 52718152,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-32",
+      "version": "32",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-32/platforms-32-linux-arm64.tar.xz",
+      "sha256": "96f6ddcedf7d53e609d37abcd8fe81f3c504a50a79e3419783cfd8a82aa28bef",
+      "size": 52762276,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-33",
+      "version": "33",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-33/platforms-33-linux-arm.tar.xz",
+      "sha256": "062da0b217eabc8b14e176b58392eba1ac9604bd851c00a2618771fe148ba7a3",
+      "size": 53651612,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-33",
+      "version": "33",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-33/platforms-33-linux-arm64.tar.xz",
+      "sha256": "60db6c2bbb5d2bced5d3b1b01dc37d075c0ff408ca4b05e72cab35b80e501193",
+      "size": 53697976,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-34",
+      "version": "34",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-34/platforms-34-linux-arm.tar.xz",
+      "sha256": "f5dbeca7ce6ff3188da618b33b92466f1b6be3322079d16f7a0f21a122d5d72a",
+      "size": 50539704,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-34",
+      "version": "34",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-34/platforms-34-linux-arm64.tar.xz",
+      "sha256": "98a1643ec0a8009a7efd6458b7663d57a0c2d99807744140cdade6743f187f13",
+      "size": 50554988,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-35",
+      "version": "35",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-35/platforms-35-linux-arm.tar.xz",
+      "sha256": "152bdd6c718fded1283cdb65923656cc7c8c3625b32ec2aacde91f2ee11786e8",
+      "size": 51953944,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-35",
+      "version": "35",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-35/platforms-35-linux-arm64.tar.xz",
+      "sha256": "cadf6bde931652319f9d4f15b569ceefdc03a15de795053c80ad911d9935a7c9",
+      "size": 51967728,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-36",
+      "version": "36",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-36/platforms-36-linux-arm.tar.xz",
+      "sha256": "c9ccf1c55336dda69ed541fe47df9c76dd14f06506c5a985174307bb7b15f17a",
+      "size": 53087644,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-36",
+      "version": "36",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-36/platforms-36-linux-arm64.tar.xz",
+      "sha256": "fd717db5c14adcadcdbad5f3b6a080224477f0fe930eab785ec5643238ab6b4c",
+      "size": 53101344,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-36.1",
+      "version": "36.1",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-36.1/platforms-36.1-linux-arm.tar.xz",
+      "sha256": "a73cc1ff503e35b5374359c6b9e0e91d7b3d01ef8661aba241e991b89384f949",
+      "size": 53294656,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-36.1",
+      "version": "36.1",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-36.1/platforms-36.1-linux-arm64.tar.xz",
+      "sha256": "d6f85a138e619563fbf358fd51f6d3cd755d2f755a348c9181ca17b9e95419d0",
+      "size": 53309280,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-37.0",
+      "version": "37.0",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-37.0/platforms-37.0-linux-arm.tar.xz",
+      "sha256": "e6d725a06ca1770d10b3d52ab30b1baed10f9f3c0bdb4e6cc93772a4e0df6a2c",
+      "size": 51197956,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-37.0",
+      "version": "37.0",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-37.0/platforms-37.0-linux-arm64.tar.xz",
+      "sha256": "7eb4e19d49625c0c641c9e8a19869dc1e50a9738e77e74fa9f7e835efec570d9",
+      "size": 52372740,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-37.1",
+      "version": "37.1",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-37.1/platforms-37.1-linux-arm.tar.xz",
+      "sha256": "296db4a6de22d9f5d52a0c8029992be54e9662ffde4420328086360710eb1312",
+      "size": 51325076,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-37.1",
+      "version": "37.1",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-37.1/platforms-37.1-linux-arm64.tar.xz",
+      "sha256": "a515ad7321ec89caf97b5a8338b5b3fd1d5d1d4e2384d4a2d9a63dbaf1301f03",
+      "size": 52499244,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-37.2",
+      "version": "37.2",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-37.2/platforms-37.2-linux-arm.tar.xz",
+      "sha256": "1098f3a22a31806c97ee0f8d863da29d24660e419288d4d729f82255a4881cee",
+      "size": 51703920,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "platforms;android-37.2",
+      "version": "37.2",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-platforms-37.2/platforms-37.2-linux-arm64.tar.xz",
+      "sha256": "bc487a6fb608cfba11728c3a6c0fd55d5dc0599867cc539fbe1e219923acc6a0",
+      "size": 52873484,
+      "license": "apex-sdk-license"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+name: Make NDK (Bionic)
+run-name: Make NDK-r${{inputs.version}}${{inputs.revision}}
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "NDK Release version:"
+        default: "30"
+        required: true
+        type: string
+      revision:
+        description: "NDK Release revision:"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  make:
+    uses: ./.github/workflows/make-ndk.yml
+    secrets: inherit
+    with:
+      platform: bionic
+      version: ${{ inputs.version }}
+      revision: ${{ inputs.revision }}
+      # riscv64-linux-android
+      targets: '["aarch64-linux-android", "armv7a-linux-androideabi", "i686-linux-android", "x86_64-linux-android"]'

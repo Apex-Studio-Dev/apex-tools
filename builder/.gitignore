@@ -1,0 +1,7 @@
+/extras
+/build
+/install
+/cmake-[0-9]*
+/ninja-*
+/openssl
+/zig-as-llvm
