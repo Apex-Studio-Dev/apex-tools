@@ -319,7 +319,7 @@ build_make() {
                        CFLAGS="-O2 -Wno-error=implicit-function-declaration"
                        CXXFLAGS="-O2 -Wno-error=implicit-function-declaration"
                       LDFLAGS="-static -Wl,--undefined-version"
-                       ac_cv_lib_elf_elf_begin=no am_cv_func_iconv=no ac_cv_func_pselect=yes ) ;;
+                       ac_cv_header_dlfcn_h=no ac_cv_lib_elf_elf_begin=no am_cv_func_iconv=no ac_cv_func_pselect=yes ) ;;
       linux)   args+=( CFLAGS="-O2 -Wno-error=incompatible-pointer-types $CROSS_CFLAGS"
                        CXXFLAGS="-O2 -Wno-error=incompatible-pointer-types $CROSS_CFLAGS"
                        LDFLAGS="$CROSS_LDFLAGS" )
