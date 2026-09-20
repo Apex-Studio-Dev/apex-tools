@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-09-20T13:59:08Z",
+  "generated": "2026-09-20T19:14:34Z",
   "min_cli": "0.1.0",
   "packages": [
     {
@@ -560,8 +560,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.0.10792818/ndk-26.0.10792818-linux-arm.tar.xz",
-      "sha256": "6f22b43f2bc6d82d6fe74d5ea8cf20de6a388afc92c4508bd957f675daca2d8b",
-      "size": 199060092,
+      "sha256": "9c5116f693aebdfbcbea5e3b001e56e200ee36a85392cca150b44e9cc1613401",
+      "size": 199021844,
       "license": "apex-sdk-license"
     },
     {
@@ -571,8 +571,8 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.0.10792818/ndk-26.0.10792818-linux-arm64.tar.xz",
-      "sha256": "0bf1c442fcd33162c2981494473c0e95ae067c42062c6536e6645f526f04047c",
-      "size": 200279212,
+      "sha256": "b8d890e9a6a2ea15325ce42d39bd514b13f3ae08837cb3098f032a34a5141590",
+      "size": 200281536,
       "license": "apex-sdk-license"
     },
     {
@@ -582,8 +582,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.1.10909125/ndk-26.1.10909125-linux-arm.tar.xz",
-      "sha256": "708b676321b04edf953615bd8565dce23183f54f6385a89d2d7805c3e3187a08",
-      "size": 199059328,
+      "sha256": "739046f8bb30ad90a57169256958e08e8191ed353db44a296ba98e4048db0161",
+      "size": 199044304,
       "license": "apex-sdk-license"
     },
     {
@@ -593,8 +593,8 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.1.10909125/ndk-26.1.10909125-linux-arm64.tar.xz",
-      "sha256": "4f10b09aa583a7f91ef8d8f18fc404df0c3f68a22e7cdc93d5308ce233d50083",
-      "size": 200315784,
+      "sha256": "b7fe7a083d4de592cbf7c19272ac460e214c188f52b37668d7c48313a5322bfc",
+      "size": 200261092,
       "license": "apex-sdk-license"
     },
     {
@@ -604,8 +604,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.2.11394342/ndk-26.2.11394342-linux-arm.tar.xz",
-      "sha256": "d15f251aa3fbd1e2729d8919562dc184fd29172c5e7dd1e558b3612755afb916",
-      "size": 199039464,
+      "sha256": "260ca798476c3e60d044d0cb01151961dd9ea8bdc1d0f80c42f1d94c52639c49",
+      "size": 199018312,
       "license": "apex-sdk-license"
     },
     {
@@ -615,8 +615,8 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.2.11394342/ndk-26.2.11394342-linux-arm64.tar.xz",
-      "sha256": "f3b78407eaec41559cbd65d61780fb77e671b24ce3765b8133f1e539aac20fac",
-      "size": 200297036,
+      "sha256": "9679b710488af20764506076b7d29d60b869844547c982aa53ac799eaaed59cb",
+      "size": 200295332,
       "license": "apex-sdk-license"
     },
     {
@@ -626,8 +626,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.3.11579264/ndk-26.3.11579264-linux-arm.tar.xz",
-      "sha256": "b7247995eaa948a4b31ca691a5d528467752b0923c0c94a483cfad3f559ab3e8",
-      "size": 199042816,
+      "sha256": "c2aab9ec21b8cfa78c1d82c329db144543cd186f49aea4689be370d87bb43b55",
+      "size": 199032088,
       "license": "apex-sdk-license"
     },
     {
@@ -637,8 +637,74 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-26.3.11579264/ndk-26.3.11579264-linux-arm64.tar.xz",
-      "sha256": "4dba6826afecdb2c29a3bdc5385428ccac8ad66b82c78e6fd66641226d9dc7ab",
-      "size": 200325556,
+      "sha256": "945c108e5808928774565eb8436f4c5de2760f87a5719bbd93021b089011c58f",
+      "size": 200283648,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;27.0.12077973",
+      "version": "27.0.12077973",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.0.12077973/ndk-27.0.12077973-linux-arm.tar.xz",
+      "sha256": "c9f316f101d8bff5cbb24a58c06f14930e30036c6bb751c0d40887cf15300203",
+      "size": 231800988,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;27.0.12077973",
+      "version": "27.0.12077973",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.0.12077973/ndk-27.0.12077973-linux-arm64.tar.xz",
+      "sha256": "396aaf910b1fb5247780c6f33ddb14653ef860d101f4fe99ed3163d412d9f59e",
+      "size": 233402988,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;27.1.12297006",
+      "version": "27.1.12297006",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.1.12297006/ndk-27.1.12297006-linux-arm.tar.xz",
+      "sha256": "ef24ad57c2f4f910a276b28c12f704373e446db16d4398a79af447f64a380975",
+      "size": 231805644,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;27.1.12297006",
+      "version": "27.1.12297006",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.1.12297006/ndk-27.1.12297006-linux-arm64.tar.xz",
+      "sha256": "236d3ac0289814ab5c163166dd7e6603b43e111a42196ce68f055a6229baeaf0",
+      "size": 233404436,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;27.2.12479018",
+      "version": "27.2.12479018",
+      "hosts": [
+        "linux-arm"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.2.12479018/ndk-27.2.12479018-linux-arm.tar.xz",
+      "sha256": "9de965ad24aba681d78e7754f589dc5626a228cb1cb9a85f2081021644b99742",
+      "size": 231832688,
+      "license": "apex-sdk-license"
+    },
+    {
+      "path": "ndk;27.2.12479018",
+      "version": "27.2.12479018",
+      "hosts": [
+        "linux-arm64"
+      ],
+      "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.2.12479018/ndk-27.2.12479018-linux-arm64.tar.xz",
+      "sha256": "d02b17efe3f54725fcf351e5932ddfdbae60873dc15556f3a0862ff97b73b7e0",
+      "size": 233395192,
       "license": "apex-sdk-license"
     },
     {
@@ -648,8 +714,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.3.13750724/ndk-27.3.13750724-linux-arm.tar.xz",
-      "sha256": "5870ad434dbce46a219b16e6eae1f83b99e53f1101ca8cfefaa7b598e0cb9af0",
-      "size": 214326112,
+      "sha256": "0f3dbc3e71629733052e10c59d0679da32c75ccc71c74173850d748d0e778b99",
+      "size": 231818728,
       "license": "apex-sdk-license"
     },
     {
@@ -659,8 +725,8 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-27.3.13750724/ndk-27.3.13750724-linux-arm64.tar.xz",
-      "sha256": "8175d3e082ff8ca6099d5583dfddae2b965619bcb4edd46f635a4271951f3a0f",
-      "size": 216192624,
+      "sha256": "9ec6be65f85f4d3fd9d2cdebcf3c03bbf15fb92234de7a857cceb1bd44623713",
+      "size": 233399084,
       "license": "apex-sdk-license"
     },
     {
@@ -670,8 +736,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.0.13004108/ndk-28.0.13004108-linux-arm.tar.xz",
-      "sha256": "287b6732083fefcfa68b9b820daf023eadb1b5cbb120f1f556c0afa5c5eea4c2",
-      "size": 239112448,
+      "sha256": "52709e11b89a9624c98e8737b0bad79834d311d558be05d060b9ba22c702a5e2",
+      "size": 256115352,
       "license": "apex-sdk-license"
     },
     {
@@ -681,8 +747,8 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.0.13004108/ndk-28.0.13004108-linux-arm64.tar.xz",
-      "sha256": "e5f1d44c302ac77c6d62af75e787ee01fafcaa58bf52f46bbbd5c83d89fd0317",
-      "size": 243477556,
+      "sha256": "3e3675538db7c8f4dbb7ce6e1ef4e69979d74d28fd64e2c0c2cb859a172b9626",
+      "size": 260223584,
       "license": "apex-sdk-license"
     },
     {
@@ -692,8 +758,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.1.13356709/ndk-28.1.13356709-linux-arm.tar.xz",
-      "sha256": "e7dd560d66e408e465110b2ad374de8e491cf1a075a1427ffa93ad43325ca2df",
-      "size": 238633964,
+      "sha256": "fa01c76c10be87659ce670a938d8bd0850bce652b2d950911e12af1504d9a729",
+      "size": 255662412,
       "license": "apex-sdk-license"
     },
     {
@@ -703,8 +769,8 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.1.13356709/ndk-28.1.13356709-linux-arm64.tar.xz",
-      "sha256": "dacc7a4270c0c8c6bc7f26389fa2e00860077d76e15dfe9ef6749a4eb053f836",
-      "size": 241648560,
+      "sha256": "00cd7100573a5be5559d5ba465caca27cf5acff943c5d02d317b3f0c29058fd0",
+      "size": 258364116,
       "license": "apex-sdk-license"
     },
     {
@@ -714,8 +780,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.2.13676358/ndk-28.2.13676358-linux-arm.tar.xz",
-      "sha256": "5d364d9d427405fea96d0934dc91f8897023b88d22191aba9357927b65134312",
-      "size": 238637860,
+      "sha256": "f2420514f3b578ce16696bd345a50c3fe6e54431d17d64fb95272d651cde37c9",
+      "size": 255603872,
       "license": "apex-sdk-license"
     },
     {
@@ -725,8 +791,8 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-28.2.13676358/ndk-28.2.13676358-linux-arm64.tar.xz",
-      "sha256": "c8112f91e318e8a513dc05a9ef88666e2615d39c4865c3a14cb31d9a027f157e",
-      "size": 241630412,
+      "sha256": "12a1c2bb156b15e732f271cb621a0254ac50ff232ddb4354fc2da63709c86b73",
+      "size": 258378388,
       "license": "apex-sdk-license"
     },
     {
@@ -736,8 +802,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-29.0.14206865/ndk-29.0.14206865-linux-arm.tar.xz",
-      "sha256": "e07cc50455f4905d28f03e04d73d7385fde9ec280d4be226d15e65f5f8a92dde",
-      "size": 253631924,
+      "sha256": "c45cb85bc2c667936beb4000a70722a9e30ff629e26ed952e8f99feaad8dbaff",
+      "size": 270666824,
       "license": "apex-sdk-license"
     },
     {
@@ -747,8 +813,8 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-29.0.14206865/ndk-29.0.14206865-linux-arm64.tar.xz",
-      "sha256": "a81fd93a3ff40e11a31f8067ae2886e227a60bae75de5f321a8580344bfd83db",
-      "size": 255212816,
+      "sha256": "b08f38f8d94874486768db4ec12893d9048af82b0df8e0d2cebec5af7f7a897f",
+      "size": 271945036,
       "license": "apex-sdk-license"
     },
     {
@@ -758,8 +824,8 @@
         "linux-arm"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-30.0.16248370/ndk-30.0.16248370-linux-arm.tar.xz",
-      "sha256": "b4914d46836c1114019351ad86efbd245588f21722427069c70172543e1845c4",
-      "size": 283393032,
+      "sha256": "f5fb2a2d3ce85ef1789e2921e04b203ed109182791f8557c1bf544535b08ac44",
+      "size": 300391608,
       "license": "apex-sdk-license"
     },
     {
@@ -769,8 +835,8 @@
         "linux-arm64"
       ],
       "url": "https://github.com/Apex-Studio-Dev/apex-tools/releases/download/apex-ndk-30.0.16248370/ndk-30.0.16248370-linux-arm64.tar.xz",
-      "sha256": "3acfdd11ec1af38afd9cbd804b7e526408c0d67a80c688e98d747b90d0fc9b1e",
-      "size": 284366212,
+      "sha256": "6e55034496d1c34595cb18159222c35a665aad47754884f10b30fe704e6dfcf8",
+      "size": 301114172,
       "license": "apex-sdk-license"
     },
     {
